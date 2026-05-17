@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectando ao Meu Pequeno...</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            text-align: center; 
+            padding: 40px 20px; 
+            background-color: #F7F9FC; 
+            color: #1A1A2E; 
+        }
+        .loader { 
+            border: 4px solid #f3f3f3; 
+            border-top: 4px solid #007AFF; 
+            border-radius: 50%; 
+            width: 45px; 
+            height: 45px; 
+            animation: spin 1s linear infinite; 
+            margin: 30px auto; 
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .btn { 
+            display: inline-block; 
+            padding: 14px 28px; 
+            background-color: #007AFF; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            box-shadow: 0 4px 6px rgba(0,122,255,0.15);
+        }
+        #fallback { display: none; margin-top: 30px; padding: 0 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>Abrindo o convite no aplicativo Meu Pequeno...</h2>
+    <div class="loader"></div>
+
+    <div id="fallback">
+        <p>Se o seu aplicativo não abrir automaticamente, clique no botão abaixo:</p>
+        <a id="app-link" class="btn" href="#">Abrir no Aplicativo</a>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // 1. Captura o token enviado na URL (?token=XXXX)
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+
+            if (token) {
+                const deepLinkUrl = "mylittle://invite/" + token;
+
+                // 2. Dispara a tentativa de abertura do Custom Scheme do app
+                window.location.href = deepLinkUrl;
+
+                // 3. Se o app não abrir em 2.5 segundos, exibe o botão de contingência
+                setTimeout(function() {
+                    document.getElementById('app-link').href = deepLinkUrl;
+                    document.getElementById('fallback').style.display = 'block';
+                }, 2500);
+            } else {
+                document.body.innerHTML = "<h2>A URL do convite está mal formatada ou falta o token.</h2>";
+            }
+        };
+    </script>
+</body>
+</html>
