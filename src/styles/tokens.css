@@ -50,3 +50,18 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Visually hides content without removing it from the accessibility tree via display:none.
+   Used for the honeypot fields in the form islands (paired with aria-hidden there, since
+   those specific fields must be invisible to assistive tech too, not just off-screen). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
