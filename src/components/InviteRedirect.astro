@@ -1,0 +1,105 @@
+---
+// Reproduces the production invite deep-link contract from legacy/index.html:
+// ?token=<t> -> location.href = "mylittle://invite/" + t, then after 2500ms
+// reveal a fallback link pointing at the same deep link.
+// No token -> landing shows (no error), unlike the legacy page.
+---
+
+<script is:inline>
+  ;(function () {
+    var t = new URLSearchParams(window.location.search).get('token')
+    if (t && t.trim()) {
+      var deepLink = 'mylittle://invite/' + t
+      document.documentElement.dataset.invite = '1'
+      window.location.href = deepLink
+      window.setTimeout(function () {
+        var fallback = document.getElementById('invite-fallback')
+        if (fallback) {
+          fallback.href = deepLink
+          fallback.hidden = false
+        }
+      }, 2500)
+    }
+  })()
+</script>
+
+<div id="invite-overlay">
+  <div class="invite-overlay__panel">
+    <p class="invite-overlay__text">Abrindo o convite no aplicativo Meu Cuidado…</p>
+    <div class="invite-overlay__spinner" aria-hidden="true"></div>
+    <a id="invite-fallback" class="invite-overlay__fallback" href="#" hidden>Abrir no aplicativo</a>
+  </div>
+</div>
+
+<style is:global>
+  html[data-invite='1'] .landing {
+    display: none;
+  }
+
+  #invite-overlay {
+    display: none;
+  }
+
+  html[data-invite='1'] #invite-overlay {
+    display: flex;
+  }
+</style>
+
+<style>
+  #invite-overlay {
+    align-items: center;
+    background: var(--cream);
+    inset: 0;
+    justify-content: center;
+    min-height: 100vh;
+    position: fixed;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .invite-overlay__panel {
+    padding: var(--space-24);
+  }
+
+  .invite-overlay__text {
+    color: var(--deep);
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-24);
+  }
+
+  .invite-overlay__spinner {
+    animation: invite-spin 1s linear infinite;
+    border: 4px solid var(--mint-l);
+    border-radius: 50%;
+    border-top-color: var(--teal);
+    height: 44px;
+    margin: 0 auto;
+    width: 44px;
+  }
+
+  .invite-overlay__fallback {
+    background: var(--teal);
+    border-radius: 8px;
+    color: #fff;
+    display: inline-block;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    margin-top: var(--space-24);
+    padding: var(--space-12) var(--space-24);
+  }
+
+  .invite-overlay__fallback[hidden] {
+    display: none;
+  }
+
+  @keyframes invite-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>

@@ -1,9 +1,15 @@
 ---
+export const prerender = true
+
 import Base from '../layouts/Base.astro'
+import InviteRedirect from '../components/InviteRedirect.astro'
 ---
 
-<Base title="Meu Cuidado" description="Meu Cuidado — em construção.">
-  <h1 style="color: var(--teal); font-family: 'Manrope', sans-serif; font-weight: 800; padding: var(--space-64);">
-    Meu Cuidado
-  </h1>
+<Base title="Meu Cuidado" description="Meu Cuidado — cuidado compartilhado de quem você ama.">
+  <InviteRedirect />
+  <main class="landing">
+    <h1 style="color: var(--teal); font-family: 'Manrope', sans-serif; font-weight: 800; padding: var(--space-64);">
+      Meu Cuidado
+    </h1>
+  </main>
 </Base>
