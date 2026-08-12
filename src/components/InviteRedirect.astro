@@ -6,6 +6,13 @@
 ---
 
 <script is:inline>
+  // NOTE: This parse-token + deep-link logic is intentionally duplicated
+  // from src/lib/inviteToken.ts (parseInviteToken / buildDeepLink). This
+  // is:inline script must run synchronously before first paint (see the
+  // comment below on document.documentElement.dataset.invite), so it
+  // cannot import the module and must inline the same logic instead. Keep
+  // the deep-link format `mylittle://invite/<token>` in sync with
+  // buildDeepLink() in that module if either one changes.
   ;(function () {
     var t = new URLSearchParams(window.location.search).get('token')
     if (t && t.trim()) {

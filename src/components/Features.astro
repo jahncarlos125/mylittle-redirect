@@ -126,14 +126,23 @@ const cards = [
     border-radius: 18px;
     padding: var(--space-24);
     text-align: center;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease;
   }
 
   .card:hover {
-    transform: translateY(-4px);
     box-shadow: 0 20px 40px rgba(15, 92, 82, 0.14);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card {
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
   }
 
   .card__media {
