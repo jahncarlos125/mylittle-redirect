@@ -10,15 +10,30 @@
     var t = new URLSearchParams(window.location.search).get('token')
     if (t && t.trim()) {
       var deepLink = 'mylittle://invite/' + t
+      // Set synchronously: only touches an attribute, does not abort parsing,
+      // so .landing/#invite-overlay toggle before first paint (no flash).
       document.documentElement.dataset.invite = '1'
-      window.location.href = deepLink
-      window.setTimeout(function () {
-        var fallback = document.getElementById('invite-fallback')
-        if (fallback) {
-          fallback.href = deepLink
-          fallback.hidden = false
-        }
-      }, 2500)
+
+      function openInvite() {
+        // Navigating to an unregistered custom scheme aborts the in-flight
+        // HTML parse, so this must run only after the document (including
+        // the overlay markup and #invite-fallback below) has finished
+        // parsing — otherwise those nodes never make it into the DOM.
+        window.location.href = deepLink
+        window.setTimeout(function () {
+          var fallback = document.getElementById('invite-fallback')
+          if (fallback) {
+            fallback.href = deepLink
+            fallback.hidden = false
+          }
+        }, 2500)
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', openInvite)
+      } else {
+        openInvite()
+      }
     }
   })()
 </script>
