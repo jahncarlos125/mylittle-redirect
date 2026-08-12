@@ -1,0 +1,244 @@
+.hero-glow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -120px;
+  top: -160px;
+  z-index: 1;
+  background: radial-gradient(circle, rgba(111, 214, 192, 0.22), transparent 62%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-glow {
+    animation: hero-breathe 7s ease-in-out infinite;
+  }
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 38px 40px 60px;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.hero-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--mint);
+  border: 1px solid rgba(111, 214, 192, 0.4);
+  background: rgba(111, 214, 192, 0.08);
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 0 0 rgba(111, 214, 192, 0.6);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-badge-dot {
+    animation: hero-pulse 2s infinite;
+  }
+}
+
+.hero h1 {
+  font-weight: 800;
+  font-size: 47px;
+  line-height: 1.04;
+  letter-spacing: -1.6px;
+  margin: 20px 0 0;
+  max-width: 560px;
+}
+
+.hero h1 .hero-hl {
+  color: var(--mint);
+}
+
+.hero-sub {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--mint-l);
+  margin-top: 20px;
+  max-width: 460px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.hero-btn1,
+.hero-btn2 {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-btn1 {
+  font-weight: 800;
+  font-size: 15.5px;
+  color: #06231f;
+  background: var(--mint);
+  padding: 15px 26px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(111, 214, 192, 0.28);
+  transition: transform 0.2s ease;
+}
+
+.hero-btn2 {
+  font-weight: 700;
+  font-size: 15.5px;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 15px 24px;
+  border-radius: 14px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hero-btn1:hover,
+.hero-btn1:focus-visible {
+  transform: translateY(-2px);
+}
+
+.hero-btn2:hover,
+.hero-btn2:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.hero-btn1:focus-visible,
+.hero-btn2:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+}
+
+.hero-stat {
+  display: flex;
+  gap: 28px;
+  margin-top: 34px;
+}
+
+.hero-stat b {
+  display: block;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.hero-stat span {
+  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--mint-l);
+}
+
+.hero-right {
+  flex: 0 0 300px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-phone-wrap {
+  width: 290px;
+  border-radius: 38px;
+  padding: 9px;
+  background: linear-gradient(160deg, #0c2f2a, #08221e);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  transform: rotate(3deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-phone-wrap {
+    animation: hero-floaty 6s ease-in-out 1.3s infinite;
+  }
+}
+
+.hero-phone-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 30px;
+}
+
+@keyframes hero-floaty {
+  0%,
+  100% {
+    transform: rotate(3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-16px);
+  }
+}
+
+@keyframes hero-breathe {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes hero-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(111, 214, 192, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(111, 214, 192, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(111, 214, 192, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero-right {
+    flex: none;
+  }
+
+  .hero-cta,
+  .hero-stat,
+  .hero-badge {
+    justify-content: center;
+  }
+
+  .hero-sub,
+  .hero h1 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

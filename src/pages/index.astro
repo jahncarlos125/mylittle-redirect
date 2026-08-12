@@ -3,13 +3,35 @@ export const prerender = true
 
 import Base from '../layouts/Base.astro'
 import InviteRedirect from '../components/InviteRedirect.astro'
+import Nav from '../components/Nav.astro'
+import Hero from '../components/Hero.tsx'
 ---
 
 <Base title="Meu Cuidado" description="Meu Cuidado — cuidado compartilhado de quem você ama.">
   <InviteRedirect />
   <main class="landing">
-    <h1 style="color: var(--teal); font-family: 'Manrope', sans-serif; font-weight: 800; padding: var(--space-64);">
-      Meu Cuidado
-    </h1>
+    <div class="hero-shell">
+      <Nav />
+      <Hero client:load />
+    </div>
   </main>
 </Base>
+
+<style>
+  .landing {
+    padding: var(--space-16);
+  }
+
+  .hero-shell {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: radial-gradient(120% 90% at 85% 8%, #1a7d6b 0%, var(--teal) 40%, var(--deep) 100%);
+  }
+
+  @media (min-width: 720px) {
+    .landing {
+      padding: var(--space-24);
+    }
+  }
+</style>
