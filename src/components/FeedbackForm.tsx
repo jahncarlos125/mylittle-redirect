@@ -78,7 +78,7 @@ export default function FeedbackForm() {
         <p>Achou um bug, teve uma ideia ou só quer elogiar? Conta pra gente.</p>
       </div>
 
-      <form className="feedback__form" onSubmit={handleSubmit} noValidate>
+      <form className="feedback__form" method="post" onSubmit={handleSubmit} noValidate>
         <div className="field">
           <label htmlFor={nameId}>Nome (opcional)</label>
           <input

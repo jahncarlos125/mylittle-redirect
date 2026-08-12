@@ -71,7 +71,7 @@ export default function TestCta() {
         </p>
       </div>
 
-      <form className="test-cta__form" onSubmit={handleSubmit} noValidate>
+      <form className="test-cta__form" method="post" onSubmit={handleSubmit} noValidate>
         <div className="field">
           <label htmlFor={nameId}>Nome</label>
           <input
