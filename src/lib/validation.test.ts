@@ -1,10 +1,15 @@
 import { describe, it, expect } from 'vitest'
-import { isValidEmail, isBot, validateSignup, validateFeedback } from './validation'
+import { isValidEmail, isBot, sanitize, validateSignup, validateFeedback } from './validation'
 
 describe('validation', () => {
   it('valida email', () => {
     expect(isValidEmail('a@b.com')).toBe(true)
     expect(isValidEmail('nope')).toBe(false)
+  })
+  it('sanitize corta no max e trima', () => {
+    expect(sanitize('  hi  ', 10)).toBe('hi')
+    expect(sanitize('x'.repeat(300), 5)).toBe('xxxxx')
+    expect(sanitize('   ', 10)).toBe('')
   })
   it('honeypot', () => {
     expect(isBot({ website: 'x' })).toBe(true)
