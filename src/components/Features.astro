@@ -1,0 +1,187 @@
+---
+import Reveal from './Reveal.tsx'
+
+const cards = [
+  {
+    title: 'Lembretes na hora certa',
+    text: 'Notificações no momento exato de cada remédio, sem depender da memória.',
+    kind: 'single' as const,
+    src: '/screenshots/hoje-light.webp',
+    alt: 'Tela "Hoje" do app Meu Cuidado, com a lista de lembretes de remédios do dia',
+  },
+  {
+    title: 'Cuide da família',
+    text: 'Acompanhe os remédios de pais, filhos ou de quem você cuida, tudo num só lugar.',
+    kind: 'single' as const,
+    src: '/screenshots/pessoas-light.webp',
+    alt: 'Tela de pessoas cuidadas no app Meu Cuidado, com a lista de familiares acompanhados',
+  },
+  {
+    title: 'Tudo organizado',
+    text: 'Doses, horários e estoque de cada remédio sempre à mão, sem bagunça.',
+    kind: 'single' as const,
+    src: '/screenshots/remedios-light.webp',
+    alt: 'Tela de remédios cadastrados no app Meu Cuidado, com doses e horários organizados',
+  },
+  {
+    title: 'Claro & escuro',
+    text: 'O app se adapta ao seu tema preferido, de dia ou de noite.',
+    kind: 'pair' as const,
+    light: '/screenshots/hoje-light.webp',
+    dark: '/screenshots/hoje-dark.webp',
+  },
+]
+---
+
+<section class="features" aria-labelledby="features-title">
+  <div class="features__intro">
+    <h2 id="features-title">Feito para o dia a dia do cuidado</h2>
+    <p>Simples de usar, pensado para quem cuida de si e de quem ama.</p>
+  </div>
+
+  <div class="features__grid">
+    {
+      cards.map((card, i) => (
+        <Reveal client:visible delay={i * 0.08}>
+          <article class="card">
+            {card.kind === 'single' ? (
+              <div class="card__media">
+                <img
+                  class="card__img"
+                  src={card.src}
+                  alt={card.alt}
+                  width="640"
+                  height="1423"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ) : (
+              <div class="card__media card__media--pair">
+                <img
+                  class="card__img card__img--pair"
+                  src={card.light}
+                  alt="Tela do app Meu Cuidado no tema claro"
+                  width="640"
+                  height="1423"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  class="card__img card__img--pair card__img--dark"
+                  src={card.dark}
+                  alt="Tela do app Meu Cuidado no tema escuro"
+                  width="640"
+                  height="1423"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            )}
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </article>
+        </Reveal>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: var(--space-64) 0;
+  }
+
+  .features__intro {
+    max-width: 560px;
+    margin: 0 auto var(--space-40);
+    text-align: center;
+  }
+
+  .features__intro h2 {
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: -0.8px;
+    margin: 0 0 var(--space-12);
+    color: var(--deep);
+  }
+
+  .features__intro p {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-24);
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--mint-l);
+    border-radius: 18px;
+    padding: var(--space-24);
+    text-align: center;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(15, 92, 82, 0.14);
+  }
+
+  .card__media {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .card__img {
+    width: 140px;
+    height: auto;
+    aspect-ratio: 640 / 1423;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(10, 63, 56, 0.16);
+  }
+
+  .card__media--pair {
+    gap: var(--space-12);
+  }
+
+  .card__img--pair {
+    width: 110px;
+  }
+
+  .card h3 {
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -0.3px;
+    margin: 0 0 var(--space-8);
+    color: var(--deep);
+  }
+
+  .card p {
+    font-weight: 500;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  @media (max-width: 720px) {
+    .features__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .features__intro h2 {
+      font-size: 26px;
+    }
+  }
+</style>
