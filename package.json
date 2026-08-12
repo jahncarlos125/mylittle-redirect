@@ -1,0 +1,25 @@
+{
+  "name": "mylittle-site",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "astro": "^5",
+    "@astrojs/react": "^4",
+    "@astrojs/vercel": "^8",
+    "@astrojs/sitemap": "^3",
+    "react": "^18",
+    "react-dom": "^18",
+    "framer-motion": "^11",
+    "@supabase/supabase-js": "^2"
+  },
+  "devDependencies": {
+    "vitest": "^2",
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
+  }
+}
