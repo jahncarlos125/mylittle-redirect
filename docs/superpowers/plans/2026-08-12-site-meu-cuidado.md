@@ -189,7 +189,7 @@ git add -A && git commit -m "feat: redirect de convite (token) + paginas legais 
 - Consumes: assets da Task 3; tokens da Task 1.
 - Produces: `<Hero client:load />` (ilha React).
 
-- [ ] **Step 1: Portar o mockup aprovado** — o arquivo `C:/Users/jahn/AppData/Local/Temp/claude/C--www-my-little/73966264-bbf0-4d71-bb7e-3fd7d4b6587d/scratchpad/hero-mock.html` tem o CSS/estrutura **já aprovados** do hero (gradiente teal, badge pulsante, headline com "quem você ama" em mint, CTAs, mini-stats, celular flutuante com float+tilt, glow). Portar esse markup/estilo para `Hero.tsx`.
+- [ ] **Step 1: Portar o mockup aprovado** — o arquivo `docs/reference/hero-mock.html` (neste repo) tem o CSS/estrutura **já aprovados** do hero (gradiente teal, badge pulsante, headline com "quem você ama" em mint, CTAs, mini-stats, celular flutuante com float+tilt, glow), com Manrope e imagens embutidas em base64. Abrir no browser pra ver o alvo; portar esse markup/estilo para `Hero.tsx` (usando os assets de `public/` no lugar dos base64).
 - [ ] **Step 2: Motion com Framer Motion** — trocar as animações CSS de entrada por `motion.div` com `initial/animate` e stagger (badge → h1 → sub → CTAs → celular); manter float/glow em CSS (contínuos). Envolver em checagem de `prefers-reduced-motion` (`useReducedMotion` do framer-motion) → sem transform, só fade.
 - [ ] **Step 3: Nav.astro** — glifo + "Meu Cuidado" + botão "Participar do teste" com `href="#testar"` (âncora pro CTA da Task 9). Sticky opcional com leve blur ao rolar.
 - [ ] **Step 4: index** — montar `<Nav />` + `<Hero client:load />` no topo do `.landing`. Os CTAs "Quero testar" apontam `#testar`.
