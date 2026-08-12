@@ -22,21 +22,27 @@ const { title, description } = Astro.props
         font-weight: 500;
         font-style: normal;
         font-display: swap;
-        src: url('/fonts/manrope-500.ttf') format('truetype');
+        src:
+          url('/fonts/manrope-500.woff2') format('woff2'),
+          url('/fonts/manrope-500.ttf') format('truetype');
       }
       @font-face {
         font-family: 'Manrope';
         font-weight: 700;
         font-style: normal;
         font-display: swap;
-        src: url('/fonts/manrope-700.ttf') format('truetype');
+        src:
+          url('/fonts/manrope-700.woff2') format('woff2'),
+          url('/fonts/manrope-700.ttf') format('truetype');
       }
       @font-face {
         font-family: 'Manrope';
         font-weight: 800;
         font-style: normal;
         font-display: swap;
-        src: url('/fonts/manrope-800.ttf') format('truetype');
+        src:
+          url('/fonts/manrope-800.woff2') format('woff2'),
+          url('/fonts/manrope-800.ttf') format('truetype');
       }
     </style>
   </head>

@@ -8,18 +8,20 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "astro": "^5",
     "@astrojs/react": "^4",
-    "@astrojs/vercel": "^8",
     "@astrojs/sitemap": "^3",
-    "react": "^18",
-    "react-dom": "^18",
+    "@astrojs/vercel": "^8",
+    "@supabase/supabase-js": "^2",
+    "astro": "^5",
     "framer-motion": "^11",
-    "@supabase/supabase-js": "^2"
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "vitest": "^2",
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "sharp": "^0.35.3",
+    "ttf2woff2": "^8.0.1",
+    "vitest": "^2"
   }
 }
