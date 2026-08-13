@@ -15,7 +15,51 @@ img{max-width:100%;display:block}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:absolute;left:-999px;top:8px;background:var(--teal);color:#fff;padding:10px 16px;border-radius:8px;z-index:100}
 .skip-link:focus{left:8px}
-.no-js [data-animate]{opacity:1 !important;transform:none !important}
+/* ---------- Reveal base: [data-animate] fica visível sem JS/animação;
+   com JS, começa oculto até o useGSAP em components/Landing.js revelar
+   (ou, com reduced-motion, o CSS abaixo já garante visível e o useGSAP
+   confirma via clearProps, sem rodar timeline). ---------- */
+[data-animate]{will-change:transform,opacity}
+.js [data-animate="up"]{opacity:0}
+.js [data-animate="line"] > *{opacity:0}
+.no-js [data-animate],.reduced [data-animate],
+.reduced [data-animate="line"] > *{opacity:1 !important;transform:none !important}
+.line{overflow:hidden}
+.line__i{display:block}
+
+/* ============================================================
+   NAV — header fixo; solidifica (.nav--solid) via ScrollTrigger
+   ============================================================ */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  padding-block:1.15rem;border-bottom:1px solid transparent;color:#fff;
+  transition:background .45s var(--ease),backdrop-filter .45s var(--ease),padding .45s var(--ease),border-color .45s var(--ease);
+}
+.nav--solid{
+  background:rgba(10,63,56,.86);backdrop-filter:blur(16px) saturate(1.2);
+  border-bottom-color:rgba(255,255,255,.14);padding-block:.72rem;
+}
+.nav__inner{
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x);
+}
+.nav__brand{display:inline-flex;align-items:center;gap:.6em;color:inherit;text-decoration:none}
+.nav__glyph{border-radius:8px;flex:none}
+.nav__wordmark{font-weight:800;font-size:1.05rem;letter-spacing:-0.01em}
+.nav__links{display:flex;align-items:center;gap:1.5rem}
+.nav__cta{
+  display:inline-flex;align-items:center;gap:.5em;
+  background:var(--mint);color:var(--deep);font-weight:700;font-size:.9rem;
+  padding:.68em 1.3em;border-radius:999px;text-decoration:none;
+  transition:background .3s var(--ease),transform .3s var(--ease);
+}
+.nav__cta:hover{background:#fff}
+
+/* ---------- Barra de progresso (scroll) ---------- */
+[data-progress]{
+  position:fixed;top:0;left:0;height:3px;width:100%;
+  background:var(--teal);transform:scaleX(0);transform-origin:left;z-index:60;
+}
 #invite-overlay{display:none}
 html[data-invite="1"] .landing{display:none}
 html[data-invite="1"] #invite-overlay{display:flex}
