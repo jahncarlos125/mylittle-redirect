@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abisay.tech/sitemap-index.xml
+Sitemap: https://cuidado.abisay.tech/sitemap-index.xml
