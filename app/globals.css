@@ -401,3 +401,58 @@ html[data-invite="1"] #invite-overlay{display:flex}
   margin-top:var(--space-24);display:flex;flex-direction:column;gap:var(--space-16);
   text-align:left;
 }
+
+/* ============================================================
+   FAQ — cena 8, creme (mesma família do Manifesto/Recursos/
+   Feedback). Acordeão CSS-only: cada painel é um grid de uma
+   linha (0fr fechado, 1fr aberto), então a transição de altura
+   nunca precisa medir o conteúdo em JS. O <button> expõe
+   aria-expanded (usado tanto pra semântica quanto, via seletor de
+   atributo, pra girar o ícone +/×). A regra global de
+   reduced-motion no topo do arquivo já zera a duração da
+   transição — nenhum tratamento extra aqui.
+   ============================================================ */
+.faq{background:var(--cream);color:var(--ink)}
+.faq__inner{max-width:820px;margin-inline:auto;padding:clamp(4.5rem,8vw,7rem) var(--pad-x)}
+.faq__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em;text-align:center}
+
+.faq__list{margin-top:var(--space-40);display:flex;flex-direction:column;gap:var(--space-16)}
+.faq__item{background:#fff;border:1px solid var(--mint-l);border-radius:14px;overflow:hidden}
+.faq__q{margin:0}
+.faq__trigger{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--space-16);
+  background:none;border:0;font:inherit;font-weight:700;font-size:1rem;text-align:left;
+  color:var(--ink);padding:var(--space-16) var(--space-24);cursor:pointer;
+}
+.faq__icon{
+  position:relative;flex:none;width:22px;height:22px;border-radius:50%;background:var(--mint-l);
+}
+.faq__icon::before,.faq__icon::after{
+  content:"";position:absolute;left:50%;top:50%;background:var(--teal);
+  transform:translate(-50%,-50%);transition:opacity .25s var(--ease),transform .25s var(--ease);
+}
+.faq__icon::before{width:10px;height:2px}
+.faq__icon::after{width:2px;height:10px}
+.faq__trigger[aria-expanded="true"] .faq__icon::after{opacity:0;transform:translate(-50%,-50%) rotate(90deg)}
+
+.faq__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease)}
+.faq__panel[data-open="true"]{grid-template-rows:1fr}
+.faq__panel-inner{overflow:hidden;min-height:0}
+.faq__panel-inner p{padding:0 var(--space-24) var(--space-16);opacity:.82;line-height:1.6;max-width:64ch}
+.faq__panel-inner a{color:var(--teal)}
+
+/* ============================================================
+   FOOTER — cena 9, teal (mesma família do Hero/Como funciona).
+   Rodapé simples: marca, links legais/contato, copyright.
+   ============================================================ */
+.footer{background:var(--teal);color:#fff}
+.footer__inner{
+  max-width:var(--maxw);margin-inline:auto;padding:var(--space-40) var(--pad-x);
+  display:flex;flex-direction:column;align-items:center;gap:var(--space-16);text-align:center;
+}
+.footer__brand{font-weight:800;font-size:1.05rem}
+.footer__links{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-8) var(--space-24)}
+.footer__links a{color:var(--mint-l);text-decoration:none}
+.footer__links a:hover{color:#fff;text-decoration:underline}
+.footer__links a:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:2px}
+.footer__copy{opacity:.72;font-size:.85rem}

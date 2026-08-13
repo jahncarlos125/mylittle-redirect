@@ -1,5 +1,12 @@
 // Texto juridico identico ao legacy/politica-de-privacidade/index.html (apenas re-tematizado).
 // Nao alterar o conteudo visivel sem atualizar tambem o legacy correspondente.
+export const metadata = {
+  title: 'Política de Privacidade',
+  description:
+    'Como o Meu Cuidado trata dados de contas, dependentes, medicamentos, doses e lembretes.',
+  alternates: { canonical: '/politica-de-privacidade/' },
+}
+
 export default function PoliticaDePrivacidade() {
   return (
     <div className="legal-page">

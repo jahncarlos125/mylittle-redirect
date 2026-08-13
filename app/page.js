@@ -8,6 +8,14 @@ import Features from '@/components/Features'
 import Gallery from '@/components/Gallery'
 import TestCta from '@/components/TestCta'
 import FeedbackForm from '@/components/FeedbackForm'
+import Faq from '@/components/Faq'
+import Footer from '@/components/Footer'
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
+
+export const metadata = {
+  title: { absolute: SITE_TITLE },
+  description: SITE_DESCRIPTION,
+}
 
 export default function Home() {
   return (
@@ -23,8 +31,9 @@ export default function Home() {
           <Gallery />
           <TestCta />
           <FeedbackForm />
-          {/* Demais secoes da landing entram nas proximas tasks (T9+) */}
+          <Faq />
         </main>
+        <Footer />
       </Landing>
     </>
   )

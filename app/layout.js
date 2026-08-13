@@ -1,5 +1,6 @@
 import localFont from 'next/font/local'
 import './globals.css'
+import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
 
 const manrope = localFont({
   src: [
@@ -11,7 +12,46 @@ const manrope = localFont({
   display: 'swap',
 })
 
-export const metadata = { title: 'Meu Cuidado', description: 'Meu Cuidado' } // completo na Task 9
+export const metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_TITLE, template: `%s · ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    images: ['/og.png'],
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ['/og.png'],
+  },
+  icons: { icon: '/favicon.png' },
+}
+
+// JSON-LD (SoftwareApplication) — descreve o app pra rich results de busca.
+// Fica no <body> (não no <head>) seguindo o padrão do Next para scripts
+// inline server-rendered; conteúdo é estático e não depende de dados do
+// usuário, então dangerouslySetInnerHTML aqui não expõe nada sensível.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE_NAME,
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Android',
+  description: SITE_DESCRIPTION,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'BRL',
+  },
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -37,6 +77,10 @@ export default function RootLayout({ children }) {
         }} />
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
         {children}
       </body>

@@ -1,5 +1,11 @@
 // Texto juridico identico ao legacy/exclusao-de-conta/index.html (apenas re-tematizado).
 // Nao alterar o conteudo visivel sem atualizar tambem o legacy correspondente.
+export const metadata = {
+  title: 'Exclusão de conta e dados',
+  description: 'Como solicitar a exclusão da conta e dos dados do Meu Cuidado.',
+  alternates: { canonical: '/exclusao-de-conta/' },
+}
+
 export default function ExclusaoDeConta() {
   return (
     <div className="legal-page">
