@@ -92,7 +92,7 @@ export default function Features() {
         <div className="features__grid">
           {FEATURES.map((f) => (
             <article
-              className={`feature-card${f.pair ? " feature-card--pair" : ""}`}
+              className="feature-card"
               data-animate="up"
               key={f.title}
             >

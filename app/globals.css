@@ -346,7 +346,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 /* Cor sólida (não opacity): opacity:.65 sobre --ink no fundo creme rendeu
    ~3.6-4.2:1 no axe (abaixo do AA 4.5:1) — cor fixa evita qualquer
    composição de opacity com ancestrais e garante o ratio real. */
-.field__optional{font-weight:500;color:#3d4947}
+.field__optional{font-weight:500;color:#3d4947 /* ink ~82% sobre branco — contraste AA, ver contraste-aa.md */}
 .field__input{
   font:inherit;color:var(--ink);background:#fff;border:1px solid var(--mint-l);
   border-radius:10px;padding:.75em .9em;width:100%;
