@@ -4,7 +4,7 @@ import vercel from '@astrojs/vercel'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
-  site: 'https://mylittle.vercel.app',
+  site: 'https://abisay.tech',
   output: 'server',
   adapter: vercel(),
   integrations: [react(), sitemap()],
