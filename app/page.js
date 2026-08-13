@@ -1,6 +1,7 @@
 import InviteOverlay from '@/components/InviteOverlay'
 import Landing from '@/components/Landing'
 import Nav from '@/components/Nav'
+import Hero from '@/components/Hero'
 
 export default function Home() {
   return (
@@ -9,8 +10,8 @@ export default function Home() {
       <Landing>
         <Nav />
         <main id="conteudo" className="landing">
-          <h1 data-animate="up" style={{ color: 'var(--teal)', padding: '64px' }}>Meu Cuidado</h1>
-          {/* Secoes da landing entram nas proximas tasks (T4-T6) */}
+          <Hero />
+          {/* Demais secoes da landing entram nas proximas tasks (T5-T6) */}
         </main>
       </Landing>
     </>

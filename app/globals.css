@@ -84,6 +84,97 @@ html[data-invite="1"] #invite-overlay{display:flex}
   .legal-page{padding:0}
   .legal-card{border-left:0;border-right:0;border-radius:0;padding:28px 20px}
 }
+/* ============================================================
+   HERO — cena 1, teal. Entrada (data-animate) e magnetismo dos
+   CTAs são aplicados por components/Landing.js; aqui só a cena
+   estática + o float do celular / respiração do glow (CSS puro,
+   gated por prefers-reduced-motion).
+   ============================================================ */
+.hero{
+  position:relative;overflow:hidden;isolation:isolate;color:#fff;
+  padding:clamp(7rem,10vw + 3rem,9.5rem) 0 clamp(3.5rem,6vw,5rem);
+  background:radial-gradient(120% 90% at 85% 8%, #1a7d6b 0%, var(--teal) 40%, var(--deep) 100%);
+}
+.hero__glow{
+  position:absolute;width:520px;height:520px;right:-120px;top:-120px;z-index:0;
+  background:radial-gradient(circle,rgba(111,214,192,.22),transparent 62%);filter:blur(10px);
+  pointer-events:none;
+}
+.hero__fx{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hero__inner{
+  position:relative;z-index:1;display:flex;align-items:center;gap:clamp(2rem,5vw,3.5rem);
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x);
+}
+.hero__left{flex:1 1 auto;min-width:0}
+.hero__right{flex:0 0 300px;display:flex;justify-content:center}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.8125rem;
+  color:var(--mint);border:1px solid rgba(111,214,192,.4);background:rgba(111,214,192,.08);
+  padding:.5em 1em;border-radius:999px;
+}
+.badge__dot{width:8px;height:8px;border-radius:50%;background:var(--mint);flex:none}
+
+.hero__title{
+  font-weight:800;font-size:var(--fs-display);line-height:1.05;letter-spacing:-.02em;
+  margin-top:var(--space-24);max-width:15ch;
+}
+.hero__title .hl{color:var(--mint)}
+
+.hero__sub{
+  font-weight:500;font-size:var(--fs-lead);line-height:1.55;color:var(--mint-l);
+  margin-top:var(--space-16);max-width:34ch;
+}
+
+.hero__cta{display:flex;flex-wrap:wrap;gap:var(--space-12);margin-top:var(--space-24)}
+.btn{
+  display:inline-flex;align-items:center;gap:.5em;font-weight:800;font-size:.97rem;
+  padding:.95em 1.6em;border-radius:14px;text-decoration:none;
+  transition:background .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.btn--primary{color:#06231f;background:var(--mint);box-shadow:0 10px 30px rgba(111,214,192,.28)}
+.btn--primary:hover{background:#fff}
+.btn--ghost{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.28)}
+.btn--ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.45)}
+
+.hero__stats{display:flex;flex-wrap:wrap;gap:var(--space-24);margin-top:var(--space-24)}
+.hero__stats .stat b{display:block;font-weight:800;font-size:1.375rem}
+.hero__stats .stat span{font-weight:500;font-size:.78rem;color:var(--mint-l)}
+
+.hero__phone{
+  width:290px;max-width:100%;border-radius:38px;padding:9px;
+  background:linear-gradient(160deg,#0c2f2a,#08221e);
+  box-shadow:0 40px 90px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06);
+  transform:rotate(3deg);
+}
+.hero__phone img{width:100%;height:auto;display:block;border-radius:30px}
+
+@media (max-width:720px){
+  .hero__inner{flex-direction:column;text-align:center}
+  .badge,.hero__cta,.hero__stats{justify-content:center}
+  .hero__title,.hero__sub{margin-left:auto;margin-right:auto}
+  .hero__title{max-width:22ch}
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .badge__dot{animation:hero-pulse 2s infinite}
+  .hero__glow{animation:hero-breathe 7s ease-in-out infinite}
+  .hero__phone{animation:hero-float 6s ease-in-out infinite}
+}
+@keyframes hero-pulse{
+  0%{box-shadow:0 0 0 0 rgba(111,214,192,.6)}
+  70%{box-shadow:0 0 0 9px rgba(111,214,192,0)}
+  100%{box-shadow:0 0 0 0 rgba(111,214,192,0)}
+}
+@keyframes hero-breathe{
+  0%,100%{opacity:.7;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+@keyframes hero-float{
+  0%,100%{transform:rotate(3deg) translateY(0)}
+  50%{transform:rotate(3deg) translateY(-14px)}
+}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important}
