@@ -179,3 +179,65 @@ html[data-invite="1"] #invite-overlay{display:flex}
   html{scroll-behavior:auto}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important}
 }
+
+/* ============================================================
+   MANIFESTO — cena 2, creme. Só uma frase (reveal por linha,
+   data-animate="line", tratado em components/Landing.js) com
+   bastante respiro em volta.
+   ============================================================ */
+.manifesto{background:var(--cream);color:var(--ink)}
+.manifesto__inner{
+  max-width:var(--maxw);margin-inline:auto;padding:clamp(5.5rem,12vw,9rem) var(--pad-x);
+  text-align:center;
+}
+.manifesto__text{
+  font-weight:800;font-size:var(--fs-display);line-height:1.14;letter-spacing:-.02em;
+  max-width:20ch;margin-inline:auto;
+}
+
+/* ============================================================
+   COMO FUNCIONA — cena 3, teal (mesma família do Hero). Seção
+   marcada com data-pin: o useGSAP central prende a seção por um
+   trecho curto de scroll enquanto a barra de progresso e o
+   número decorativo de cada passo se destacam; os ícones ganham
+   um parallax leve. Tudo isso é pulado sob reduced-motion — aqui
+   fica só a cena estática, legível e sem overflow.
+   ============================================================ */
+.how{
+  position:relative;overflow:hidden;isolation:isolate;color:#fff;
+  padding:clamp(5rem,9vw,7.5rem) 0;
+  background:radial-gradient(120% 90% at 15% 100%, #1a7d6b 0%, var(--teal) 45%, var(--deep) 100%);
+}
+.how__inner{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x)}
+.how__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em}
+.how__sub{margin-top:var(--space-12);color:var(--mint-l);font-size:var(--fs-lead);max-width:46ch}
+
+.how__track{display:block;margin-top:var(--space-40);height:3px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
+.how__track-fill{display:block;height:100%;width:100%;background:var(--mint);transform:scaleX(1);transform-origin:left}
+.js .how__track-fill{transform:scaleX(0)}
+.reduced .how__track-fill,.no-js .how__track-fill{transform:scaleX(1)}
+
+.how__steps{
+  list-style:none;margin:var(--space-40) 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-24);
+}
+.step{
+  position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;padding:var(--space-24);
+}
+.step__num{
+  display:block;font-weight:800;font-size:.85rem;letter-spacing:.04em;
+  color:rgba(255,255,255,.55);
+}
+.step__icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:12px;margin-top:var(--space-12);
+  background:rgba(111,214,192,.14);color:var(--mint);
+}
+.step__icon svg{width:22px;height:22px}
+.step__title{margin-top:var(--space-16);font-weight:800;font-size:1.05rem;line-height:1.3}
+.step__text{margin-top:var(--space-8);color:var(--mint-l);font-size:.94rem;line-height:1.55}
+
+@media (max-width:860px){
+  .how__steps{grid-template-columns:1fr}
+}

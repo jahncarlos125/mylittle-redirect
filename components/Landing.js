@@ -155,6 +155,42 @@ export default function Landing({ children }) {
         );
       });
 
+      /* ---- Como funciona: pin curto + barra de progresso + parallax dos
+         ícones. O pin dura só 60% da altura da viewport (não o suficiente
+         pra travar o scroll) e usa scrub, então acompanha o dedo/roda em
+         vez de tocar animação por conta própria. A entrada dos .step (fade
+         + up) continua por conta do [data-animate="up"] genérico acima;
+         aqui só animamos propriedades que não conflitam com ela (a barra
+         de progresso, a cor/escala do número decorativo e o yPercent do
+         ícone), pra não competir por x/y/opacity do mesmo elemento. */
+      const pinSection = document.querySelector("[data-pin]");
+      if (pinSection) {
+        const pinRange = { trigger: pinSection, start: "top top", end: "+=60%" };
+
+        ScrollTrigger.create({ ...pinRange, pin: true, pinSpacing: true, scrub: 1 });
+
+        gsap.fromTo(
+          "[data-progress-fill]",
+          { scaleX: 0 },
+          { scaleX: 1, ease: "none", transformOrigin: "left", scrollTrigger: { ...pinRange, scrub: 1 } }
+        );
+
+        gsap.timeline({ scrollTrigger: { ...pinRange, scrub: 1 } }).to(".step__num", {
+          color: "#6fd6c0" /* --mint */,
+          scale: 1.12,
+          stagger: 0.5,
+          ease: "none",
+        });
+
+        gsap.utils.toArray("[data-pin] .step__icon").forEach((icon) => {
+          gsap.to(icon, {
+            yPercent: -10,
+            ease: "none",
+            scrollTrigger: { trigger: icon, start: "top bottom", end: "bottom top", scrub: true },
+          });
+        });
+      }
+
       ScrollTrigger.refresh();
     },
     { scope: root }
