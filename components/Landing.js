@@ -155,6 +155,24 @@ export default function Landing({ children }) {
         );
       });
 
+      /* ---- Parallax genérico (ex.: colunas da galeria de telas). Cada
+         elemento marcado com data-parallax anda em yPercent conforme o
+         próprio scroll (scrub), com velocidade dada por
+         data-parallax-speed. Usa gsap.to (não fromTo) com start "top
+         bottom": antes do elemento entrar na viewport o progress do
+         ScrollTrigger é 0, então ele nasce na posição natural (sem pulo);
+         só desloca em Y — nunca X — então não cria overflow horizontal, e
+         não há listener de wheel/preventDefault nem toque em overflow do
+         html/body, então o scroll da página nunca é sequestrado. */
+      gsap.utils.toArray("[data-parallax]").forEach((el) => {
+        const speed = parseFloat(el.dataset.parallaxSpeed) || 1;
+        gsap.to(el, {
+          yPercent: -9 * speed,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+        });
+      });
+
       /* ---- Como funciona: pin curto + barra de progresso + parallax dos
          ícones. O pin dura só 60% da altura da viewport (não o suficiente
          pra travar o scroll) e usa scrub, então acompanha o dedo/roda em

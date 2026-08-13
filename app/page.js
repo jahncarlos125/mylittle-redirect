@@ -4,6 +4,8 @@ import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
 import Manifesto from '@/components/Manifesto'
 import HowItWorks from '@/components/HowItWorks'
+import Features from '@/components/Features'
+import Gallery from '@/components/Gallery'
 
 export default function Home() {
   return (
@@ -15,7 +17,9 @@ export default function Home() {
           <Hero />
           <Manifesto />
           <HowItWorks />
-          {/* Demais secoes da landing entram nas proximas tasks (T6) */}
+          <Features />
+          <Gallery />
+          {/* Demais secoes da landing entram nas proximas tasks (T7+) */}
         </main>
       </Landing>
     </>
