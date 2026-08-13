@@ -326,3 +326,78 @@ html[data-invite="1"] #invite-overlay{display:flex}
   .gallery__col{gap:var(--space-8)}
   .gallery__col--offset{margin-top:clamp(16px,8vw,32px)}
 }
+
+/* ============================================================
+   FORM — campos/estados compartilhados por TestCta e FeedbackForm.
+   Foco visível herda de :where(a,button):focus-visible no topo do
+   arquivo; inputs/select/textarea ganham a mesma regra aqui.
+   ============================================================ */
+.field{display:flex;flex-direction:column;gap:6px;text-align:left}
+.field__label{font-weight:700;font-size:.9rem}
+.field__optional{font-weight:500;opacity:.65}
+.field__input{
+  font:inherit;color:var(--ink);background:#fff;border:1px solid var(--mint-l);
+  border-radius:10px;padding:.75em .9em;width:100%;
+  transition:border-color .2s var(--ease),box-shadow .2s var(--ease);
+}
+.field__input:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-color:var(--teal)}
+.field__textarea{resize:vertical;min-height:6.5em}
+.field__select{appearance:auto}
+
+.btn--dark{color:#fff;background:var(--teal);box-shadow:0 10px 26px rgba(15,92,82,.22)}
+.btn--dark:hover{background:var(--deep)}
+.btn--dark:disabled{opacity:.65;cursor:not-allowed;box-shadow:none}
+
+.badge--dark{color:var(--teal);border-color:rgba(15,92,82,.3);background:rgba(15,92,82,.08)}
+.badge--dark .badge__dot{background:var(--teal)}
+
+.form__status{min-height:1.4em;font-size:.9rem;font-weight:700;color:var(--teal)}
+
+/* ============================================================
+   TESTAR — cena 6, mint. Form "Quero testar" ao lado do
+   ParticleGlyph (assembly decorativo, aria-hidden na própria
+   peça). Fundo claro: texto em --ink, botão em teal escuro pra
+   garantir contraste sobre o mint.
+   ============================================================ */
+.testcta{
+  position:relative;overflow:hidden;
+  padding:clamp(5rem,9vw,7.5rem) 0;
+  background:radial-gradient(120% 100% at 85% 0%, var(--mint-l) 0%, var(--cream) 55%);
+}
+.testcta__inner{
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x);
+  display:flex;align-items:center;gap:clamp(2rem,5vw,4rem);
+}
+.testcta__copy{flex:1 1 460px;min-width:0}
+.testcta__title{
+  margin-top:var(--space-16);font-weight:800;font-size:var(--fs-h2);
+  letter-spacing:-.01em;max-width:16ch;
+}
+.testcta__sub{margin-top:var(--space-12);font-size:var(--fs-lead);opacity:.82;max-width:44ch}
+.testcta__form{margin-top:var(--space-24);display:flex;flex-direction:column;gap:var(--space-16);max-width:420px}
+
+.testcta__glyph{flex:0 0 300px;display:flex;justify-content:center}
+.testcta__glyph-canvas{width:min(300px,60vw);aspect-ratio:1/1;display:block}
+
+@media (max-width:900px){
+  .testcta__inner{flex-direction:column;text-align:center}
+  .testcta__title,.testcta__sub{margin-inline:auto}
+  .testcta__form{margin-inline:auto;text-align:left}
+  .testcta__glyph{order:-1}
+}
+
+/* ============================================================
+   FEEDBACK — cena 7, creme (mesma família do Manifesto/Recursos).
+   Form curto e centralizado.
+   ============================================================ */
+.feedback{background:var(--cream)}
+.feedback__inner{
+  max-width:640px;margin-inline:auto;padding:clamp(4.5rem,8vw,7rem) var(--pad-x);
+  text-align:center;
+}
+.feedback__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em}
+.feedback__sub{margin-top:var(--space-12);font-size:var(--fs-lead);opacity:.82}
+.feedback__form{
+  margin-top:var(--space-24);display:flex;flex-direction:column;gap:var(--space-16);
+  text-align:left;
+}

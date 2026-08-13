@@ -6,6 +6,8 @@ import Manifesto from '@/components/Manifesto'
 import HowItWorks from '@/components/HowItWorks'
 import Features from '@/components/Features'
 import Gallery from '@/components/Gallery'
+import TestCta from '@/components/TestCta'
+import FeedbackForm from '@/components/FeedbackForm'
 
 export default function Home() {
   return (
@@ -19,7 +21,9 @@ export default function Home() {
           <HowItWorks />
           <Features />
           <Gallery />
-          {/* Demais secoes da landing entram nas proximas tasks (T7+) */}
+          <TestCta />
+          <FeedbackForm />
+          {/* Demais secoes da landing entram nas proximas tasks (T9+) */}
         </main>
       </Landing>
     </>
