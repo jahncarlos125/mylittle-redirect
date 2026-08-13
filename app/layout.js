@@ -15,7 +15,7 @@ export const metadata = { title: 'Meu Cuidado', description: 'Meu Cuidado' } // 
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR" className={`${manrope.variable} no-js`}>
+    <html lang="pt-BR" className={`${manrope.variable} no-js`} suppressHydrationWarning>
       <head>
         {/* Detecta reduced-motion e no-js ANTES do paint (padrão do abisay: app/layout.js) */}
         <script dangerouslySetInnerHTML={{ __html:
