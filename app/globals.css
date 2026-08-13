@@ -16,6 +16,30 @@ img{max-width:100%;display:block}
 .skip-link{position:absolute;left:-999px;top:8px;background:var(--teal);color:#fff;padding:10px 16px;border-radius:8px;z-index:100}
 .skip-link:focus{left:8px}
 .no-js [data-animate]{opacity:1 !important;transform:none !important}
+#invite-overlay{display:none}
+html[data-invite="1"] .landing{display:none}
+html[data-invite="1"] #invite-overlay{display:flex}
+.invite-overlay{min-height:100dvh;width:100%;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--space-24);padding:var(--space-24);background:var(--cream)}
+.invite-spinner{width:44px;height:44px;border-radius:50%;border:4px solid var(--mint-l);border-top-color:var(--teal);animation:invite-spin 1s linear infinite}
+.reduced .invite-spinner{animation:none;border-top-color:var(--mint-l)}
+.invite-overlay__text{font-size:var(--fs-lead);color:var(--ink);max-width:36ch}
+.invite-fallback{margin-top:var(--space-8)}
+.invite-fallback__hint{color:var(--ink);opacity:.72;margin-bottom:var(--space-12)}
+.invite-fallback__link{display:inline-block;background:var(--teal);color:#fff;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:700}
+.invite-fallback__link:hover{background:var(--deep)}
+@keyframes invite-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.legal-page{min-height:100dvh;padding:var(--space-40) var(--pad-x)}
+.legal-card{background:#fff;border:1px solid var(--mint-l);border-radius:16px;margin:0 auto;max-width:860px;padding:var(--space-40)}
+.legal-card h1{font-size:clamp(1.7rem,4vw,2.4rem);color:var(--teal);line-height:1.25;margin:0 0 var(--space-8)}
+.legal-card h2{font-size:1.2rem;color:var(--teal);line-height:1.25;margin-top:var(--space-24)}
+.legal-card p,.legal-card li{color:var(--ink);opacity:.82}
+.legal-card .legal-meta{margin-top:0;opacity:.65}
+.legal-card a{color:var(--teal)}
+.legal-card ul,.legal-card ol{padding-left:var(--space-24)}
+@media (max-width:640px){
+  .legal-page{padding:0}
+  .legal-card{border-left:0;border-right:0;border-radius:0;padding:28px 20px}
+}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important}

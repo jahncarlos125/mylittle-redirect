@@ -1,0 +1,67 @@
+// Texto juridico identico ao legacy/exclusao-de-conta/index.html (apenas re-tematizado).
+// Nao alterar o conteudo visivel sem atualizar tambem o legacy correspondente.
+export default function ExclusaoDeConta() {
+  return (
+    <div className="legal-page">
+      <main id="conteudo" className="legal-card">
+        <h1>Exclusao de conta e dados</h1>
+        <p className="legal-meta">Meu Cuidado - ultima atualizacao: 22 de maio de 2026.</p>
+
+        <p>
+          Esta pagina explica como usuarios do aplicativo Meu Cuidado podem solicitar
+          a exclusao da conta e dos dados associados ao uso do app.
+        </p>
+
+        <h2>Exclusao pelo aplicativo</h2>
+        <p>Para excluir seus dados pelo Meu Cuidado:</p>
+        <ol>
+          <li>Abra o aplicativo com sua conta conectada.</li>
+          <li>Acesse <strong>Configuracoes</strong>.</li>
+          <li>Na secao <strong>Conta</strong>, toque em <strong>Excluir conta</strong>.</li>
+          <li>Leia a confirmacao e toque em <strong>Excluir</strong>.</li>
+        </ol>
+        <p>
+          Ao concluir esse fluxo, o app encerra a sessao no dispositivo e remove os
+          dados vinculados a essa conta conforme descrito abaixo.
+        </p>
+
+        <h2>Solicitacao por contato</h2>
+        <p>
+          Se voce nao conseguir acessar o aplicativo, envie uma solicitacao para{' '}
+          <a href="mailto:abisaytech@gmail.com">abisaytech@gmail.com</a> usando o email
+          da conta e informe que deseja excluir sua conta e seus dados do Meu Cuidado.
+          Podemos pedir informacoes adicionais para confirmar que a solicitacao foi
+          feita pelo titular da conta.
+        </p>
+
+        <h2>Dados excluidos</h2>
+        <p>A exclusao remove do Meu Cuidado, conforme aplicavel:</p>
+        <ul>
+          <li>Perfil do usuario no app.</li>
+          <li>Dependentes cadastrados pela conta proprietaria.</li>
+          <li>Medicamentos, doses, fotos, convites e vinculos ligados aos dependentes removidos.</li>
+          <li>Convites criados pela conta e vinculos de cuidador mantidos por ela.</li>
+          <li>Lembretes de doses agendados localmente no dispositivo durante o uso da conta.</li>
+        </ul>
+
+        <h2>Dados mantidos ou desvinculados</h2>
+        <ul>
+          <li>Se a conta for apenas cuidadora de um dependente criado por outra pessoa, o vinculo dessa conta e removido sem excluir os dados do dependente do proprietario.</li>
+          <li>Confirmacoes de doses feitas pela conta podem ser desvinculadas do perfil excluido para preservar a agenda de um dependente que continua sob responsabilidade de outro usuario.</li>
+          <li>Dados mantidos por provedores de autenticacao, logs de seguranca, backups ou registros exigidos por lei podem seguir prazos tecnicos ou legais aplicaveis.</li>
+        </ul>
+
+        <h2>Periodo adicional de armazenamento</h2>
+        <p>
+          Os registros removidos deixam de ficar disponiveis na base ativa do aplicativo
+          depois que a exclusao e concluida. Quando houver retencao tecnica, de seguranca
+          ou legal por provedores de infraestrutura, ela ocorre somente pelo periodo
+          necessario para essa finalidade.
+        </p>
+
+        <p><a href="/politica-de-privacidade/">Ler a Politica de Privacidade</a></p>
+        <p><a href="/">Voltar para a pagina de convite</a></p>
+      </main>
+    </div>
+  )
+}
