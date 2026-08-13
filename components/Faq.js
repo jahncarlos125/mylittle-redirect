@@ -44,8 +44,11 @@ const ITEMS = [
 /**
  * Cena 8: creme (mesma família do Manifesto/Recursos/Feedback). Acordeão
  * acessível: cada pergunta é um <button aria-expanded aria-controls>
- * dentro de um <h3>, controlando uma região <div role="region"
- * aria-labelledby>. Um item aberto por vez; clicar de novo fecha.
+ * dentro de um <h3>, controlando um painel <div id> associado só via
+ * aria-controls (sem role="region" no painel — 6 landmarks "region" numa
+ * página só de FAQ é ruído para leitores de tela; o padrão
+ * button+aria-expanded+aria-controls já é suficiente e acessível). Um
+ * item aberto por vez; clicar de novo fecha.
  *
  * A abertura/fechamento é só CSS (grid-template-rows 0fr↔1fr, ver
  * globals.css), sem JS medindo altura. Sob reduced-motion a transição
@@ -90,8 +93,6 @@ export default function Faq() {
                 </h3>
                 <div
                   id={panelId}
-                  role="region"
-                  aria-labelledby={buttonId}
                   className="faq__panel"
                   data-open={open}
                 >

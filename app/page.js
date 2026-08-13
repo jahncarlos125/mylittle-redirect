@@ -23,7 +23,7 @@ export default function Home() {
       <InviteOverlay />
       <Landing>
         <Nav />
-        <main id="conteudo" className="landing">
+        <main id="conteudo">
           <Hero />
           <Manifesto />
           <HowItWorks />

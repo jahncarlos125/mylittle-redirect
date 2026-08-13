@@ -215,7 +215,11 @@ export default function Landing({ children }) {
   );
 
   return (
-    <div ref={root}>
+    // "landing" (não a estrutura interna) é o que `html[data-invite="1"]
+    // .landing{display:none}` (app/globals.css) esconde durante o fluxo de
+    // convite — precisa envolver Nav+main+Footer juntos, senão nav/footer
+    // (fora do <main>) ficam visíveis por cima do overlay de convite.
+    <div ref={root} className="landing">
       <span className="progress" data-progress aria-hidden="true" />
       {children}
     </div>

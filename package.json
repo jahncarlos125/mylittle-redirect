@@ -7,18 +7,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:a11y": "playwright test"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.1",
+    "@supabase/supabase-js": "^2",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.14",
     "next": "14.2.35",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "gsap": "^3.12.5",
-    "@gsap/react": "^2.1.1",
-    "lenis": "^1.1.14",
-    "@supabase/supabase-js": "^2"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
     "vitest": "^2"
   }
 }

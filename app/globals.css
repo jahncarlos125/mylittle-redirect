@@ -1,5 +1,10 @@
 :root{
   --teal:#0f5c52; --deep:#0a3f38; --mint:#6fd6c0; --mint-l:#c6e1d8; --cream:#f6f3ee; --ink:#12211f;
+  /* --mint-l2: variante mais clara de --mint-l, só para texto pequeno sobre
+     os gradientes teal (hero__sub, how__sub, step__text) — --mint-l puro
+     cai perto de 3.6-4:1 nas partes mais claras desses gradientes, abaixo
+     do AA 4.5:1 pra texto normal. Ver docs/reference/contraste-aa.md. */
+  --mint-l2:#eef9f5;
   --font: var(--font-manrope), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --ease: cubic-bezier(0.22,1,0.36,1);
   --maxw:1240px; --pad-x:clamp(20px,5vw,64px);
@@ -110,7 +115,11 @@ html[data-invite="1"] #invite-overlay{display:flex}
 
 .badge{
   display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.8125rem;
-  color:var(--mint);border:1px solid rgba(111,214,192,.4);background:rgba(111,214,192,.08);
+  /* texto em branco (não --mint): mint sobre o gradiente teal do hero cai a
+     ~3.9:1 em partes da cena — abaixo do AA 4.5:1 pra texto normal (13px
+     bold não chega a "texto grande"). Branco garante >=4.5:1 em toda a
+     extensão do gradiente (ver docs/reference/contraste-aa.md). */
+  color:#fff;border:1px solid rgba(111,214,192,.4);background:rgba(111,214,192,.08);
   padding:.5em 1em;border-radius:999px;
 }
 .badge__dot{width:8px;height:8px;border-radius:50%;background:var(--mint);flex:none}
@@ -122,7 +131,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .hero__title .hl{color:var(--mint)}
 
 .hero__sub{
-  font-weight:500;font-size:var(--fs-lead);line-height:1.55;color:var(--mint-l);
+  font-weight:500;font-size:var(--fs-lead);line-height:1.55;color:var(--mint-l2);
   margin-top:var(--space-16);max-width:34ch;
 }
 
@@ -139,7 +148,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 
 .hero__stats{display:flex;flex-wrap:wrap;gap:var(--space-24);margin-top:var(--space-24)}
 .hero__stats .stat b{display:block;font-weight:800;font-size:1.375rem}
-.hero__stats .stat span{font-weight:500;font-size:.78rem;color:var(--mint-l)}
+.hero__stats .stat span{font-weight:500;font-size:.78rem;color:var(--mint-l2)}
 
 .hero__phone{
   width:290px;max-width:100%;border-radius:38px;padding:9px;
@@ -210,7 +219,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 .how__inner{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x)}
 .how__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em}
-.how__sub{margin-top:var(--space-12);color:var(--mint-l);font-size:var(--fs-lead);max-width:46ch}
+.how__sub{margin-top:var(--space-12);color:var(--mint-l2);font-size:var(--fs-lead);max-width:46ch}
 
 .how__track{display:block;margin-top:var(--space-40);height:3px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
 .how__track-fill{display:block;height:100%;width:100%;background:var(--mint);transform:scaleX(1);transform-origin:left}
@@ -236,7 +245,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 .step__icon svg{width:22px;height:22px}
 .step__title{margin-top:var(--space-16);font-weight:800;font-size:1.05rem;line-height:1.3}
-.step__text{margin-top:var(--space-8);color:var(--mint-l);font-size:.94rem;line-height:1.55}
+.step__text{margin-top:var(--space-8);color:var(--mint-l2);font-size:.94rem;line-height:1.55}
 
 @media (max-width:860px){
   .how__steps{grid-template-columns:1fr}
@@ -334,7 +343,10 @@ html[data-invite="1"] #invite-overlay{display:flex}
    ============================================================ */
 .field{display:flex;flex-direction:column;gap:6px;text-align:left}
 .field__label{font-weight:700;font-size:.9rem}
-.field__optional{font-weight:500;opacity:.65}
+/* Cor sólida (não opacity): opacity:.65 sobre --ink no fundo creme rendeu
+   ~3.6-4.2:1 no axe (abaixo do AA 4.5:1) — cor fixa evita qualquer
+   composição de opacity com ancestrais e garante o ratio real. */
+.field__optional{font-weight:500;color:#3d4947}
 .field__input{
   font:inherit;color:var(--ink);background:#fff;border:1px solid var(--mint-l);
   border-radius:10px;padding:.75em .9em;width:100%;
@@ -351,7 +363,10 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .badge--dark{color:var(--teal);border-color:rgba(15,92,82,.3);background:rgba(15,92,82,.08)}
 .badge--dark .badge__dot{background:var(--teal)}
 
-.form__status{min-height:1.4em;font-size:.9rem;font-weight:700;color:var(--teal)}
+/* --deep (não --teal): --teal sobre --cream mede 7.10:1 em teoria, mas o
+   axe reportou 4.49:1 nesse peso/tamanho (abaixo do AA 4.5:1) — --deep dá
+   margem bem maior (10.65:1 teórico) pra não ficar na borda. */
+.form__status{min-height:1.4em;font-size:.9rem;font-weight:700;color:var(--deep)}
 
 /* ============================================================
    TESTAR — cena 6, mint. Form "Quero testar" ao lado do
