@@ -2,10 +2,9 @@
  * Cena 3: teal, mesma família do Hero. Três passos como <ol> semântico —
  * a numeração "de verdade" fica a cargo do próprio <ol> para leitores de
  * tela; o número grande e o ícone em cada <li> são só decoração
- * (aria-hidden). A seção carrega data-pin: o useGSAP central (Landing.js)
- * prende (`pin`) a seção por um trecho curto de scroll enquanto a barra de
- * progresso e os números destacam os passos, e aplica um parallax leve nos
- * ícones — tudo isso pulado sob prefers-reduced-motion (ver Landing.js).
+ * (aria-hidden). Rola normalmente (sem pin/scroll-jacking): os passos só
+ * aparecem com o reveal/stagger padrão ([data-animate="up"], tratado em
+ * components/Landing.js) ao entrar na viewport, como as outras seções.
  */
 const STEPS = [
   {
@@ -42,7 +41,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section className="how" id="como-funciona" data-pin>
+    <section className="how" id="como-funciona">
       <div className="how__inner">
         <h2 className="how__title" data-animate="up">
           Como funciona
@@ -50,10 +49,6 @@ export default function HowItWorks() {
         <p className="how__sub" data-animate="up">
           Três passos simples, pensados pra quem cuida.
         </p>
-
-        <span className="how__track" aria-hidden="true">
-          <span className="how__track-fill" data-progress-fill />
-        </span>
 
         <ol className="how__steps">
           {STEPS.map((step, i) => (

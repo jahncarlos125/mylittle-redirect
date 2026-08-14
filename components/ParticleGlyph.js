@@ -147,5 +147,5 @@ export default function ParticleGlyph() {
     };
   }, []);
 
-  return <canvas ref={ref} className="testcta__glyph-canvas" aria-hidden="true" />;
+  return <canvas ref={ref} className="contact__glyph-canvas" aria-hidden="true" />;
 }

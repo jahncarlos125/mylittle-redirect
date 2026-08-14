@@ -33,7 +33,8 @@ const ITEMS = [
     q: "Como eu dou feedback sobre o app?",
     a: (
       <>
-        Use o formulário “Deixe seu feedback” logo abaixo, ou escreva para{" "}
+        Use o formulário logo abaixo e escolha “Enviar um feedback”, ou
+        escreva para{" "}
         <a href="mailto:abisaytech@gmail.com">abisaytech@gmail.com</a> a
         qualquer momento.
       </>

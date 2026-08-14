@@ -25,6 +25,21 @@ async function attachViolations(testInfo, results) {
   })
 }
 
+// Reforço explícito do reducedMotion:'reduce' do playwright.config.js: em
+// alguns runs o media feature emulado pelo Chromium ainda não estava
+// disponível no exato instante em que o script inline de app/layout.js lê
+// matchMedia('(prefers-reduced-motion: reduce)') logo no <head> (corrida
+// entre a emulação via CDP e o parse do documento) — nesse caso a classe
+// "reduced" não é adicionada, Lenis/GSAP entram no modo normal (com
+// reveals scroll-triggered) e uma interação que arrasta o scroll pra perto
+// do form de contato pode, em runs raros, deixar o axe escanear seções
+// mais abaixo (ex.: FAQ) ainda em transição de opacidade. Chamar
+// emulateMedia aqui, antes de cada goto, garante que o media feature já
+// está setado no browser antes da navegação.
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+})
+
 for (const path of ROUTES) {
   test(`a11y ${path}`, async ({ page }, testInfo) => {
     await page.goto(path)
@@ -36,11 +51,12 @@ for (const path of ROUTES) {
   })
 }
 
-test('a11y — TestCta em estado de erro (validação client-side)', async ({ page }, testInfo) => {
+test('a11y — ContactForm (intenção "testar") em estado de erro (validação client-side)', async ({ page }, testInfo) => {
   await page.goto('/')
   await page.waitForLoadState('networkidle')
 
   const form = page.locator('#testar form')
+  // "testar" é a intenção padrão do ContactForm — submete vazio direto.
   await form.getByRole('button', { name: /quero testar/i }).click()
 
   // aria-live do form deve anunciar o erro de validação (nome vazio)
@@ -51,14 +67,20 @@ test('a11y — TestCta em estado de erro (validação client-side)', async ({ pa
   expect(seriousOf(results), JSON.stringify(seriousOf(results), null, 2)).toEqual([])
 })
 
-test('a11y — FeedbackForm em estado de erro (validação client-side)', async ({ page }, testInfo) => {
+test('a11y — ContactForm (intenção "feedback") em estado de erro (validação client-side)', async ({ page }, testInfo) => {
   await page.goto('/')
   await page.waitForLoadState('networkidle')
 
-  const form = page.locator('#feedback form')
+  const form = page.locator('#testar form')
+  // o radio real fica visualmente escondido (chip estilizado no <label>);
+  // clicar no texto do label é o que um usuário faria e alterna o radio
+  // nativamente, sem depender de "force" pra furar a checagem de
+  // actionability do Playwright.
+  await form.getByText('Enviar um feedback', { exact: true }).click()
   await form.getByRole('button', { name: /enviar feedback/i }).click()
 
-  await expect(page.locator('#feedback .form__status')).toHaveText(/escolha o tipo/i)
+  // aria-live do form deve anunciar o erro de validação (mensagem vazia)
+  await expect(page.locator('#testar .form__status')).toHaveText(/escreva sua mensagem/i)
 
   const results = await runAxe(page)
   await attachViolations(testInfo, results)

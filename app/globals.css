@@ -225,12 +225,12 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 
 /* ============================================================
-   COMO FUNCIONA — cena 3, teal (mesma família do Hero). Seção
-   marcada com data-pin: o useGSAP central prende a seção por um
-   trecho curto de scroll enquanto a barra de progresso e o
-   número decorativo de cada passo se destacam; os ícones ganham
-   um parallax leve. Tudo isso é pulado sob reduced-motion — aqui
-   fica só a cena estática, legível e sem overflow.
+   COMO FUNCIONA — cena 3, teal (mesma família do Hero). Rola
+   normalmente: os 3 passos só aparecem com o reveal/stagger
+   padrão ([data-animate="up"], tratado em components/Landing.js)
+   ao entrar na viewport, como as outras seções — sem pin nem
+   parallax lateral (esse comportamento travava a página no
+   mobile, ver histórico do componente).
    ============================================================ */
 .how{
   position:relative;overflow:hidden;isolation:isolate;color:#fff;
@@ -240,11 +240,6 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .how__inner{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x)}
 .how__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em}
 .how__sub{margin-top:var(--space-12);color:var(--mint-l2);font-size:var(--fs-lead);max-width:46ch}
-
-.how__track{display:block;margin-top:var(--space-40);height:3px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden}
-.how__track-fill{display:block;height:100%;width:100%;background:var(--mint);transform:scaleX(1);transform-origin:left}
-.js .how__track-fill{transform:scaleX(0)}
-.reduced .how__track-fill,.no-js .how__track-fill{transform:scaleX(1)}
 
 .how__steps{
   list-style:none;margin:var(--space-40) 0 0;padding:0;
@@ -408,9 +403,10 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 
 /* ============================================================
-   FORM — campos/estados compartilhados por TestCta e FeedbackForm.
-   Foco visível herda de :where(a,button):focus-visible no topo do
-   arquivo; inputs/select/textarea ganham a mesma regra aqui.
+   FORM — campos/estados compartilhados pelo ContactForm (e usados
+   por qualquer form futuro). Foco visível herda de
+   :where(a,button):focus-visible no topo do arquivo;
+   inputs/select/textarea ganham a mesma regra aqui.
    ============================================================ */
 .field{display:flex;flex-direction:column;gap:6px;text-align:left}
 .field__label{font-weight:700;font-size:.9rem}
@@ -440,52 +436,59 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .form__status{min-height:1.4em;font-size:.9rem;font-weight:700;color:var(--deep)}
 
 /* ============================================================
-   TESTAR — cena 6, mint. Form "Quero testar" ao lado do
-   ParticleGlyph (assembly decorativo, aria-hidden na própria
-   peça). Fundo claro: texto em --ink, botão em teal escuro pra
-   garantir contraste sobre o mint.
+   CONTATO — cena 6, mint. Form único (substitui os antigos
+   TestCta + FeedbackForm): a pessoa escolhe a intenção num
+   seletor de radios estilo "segmented control"
+   (.contact__intent-options, ver ContactForm.js) e os campos
+   abaixo mudam conforme a escolha. ParticleGlyph decorativo ao
+   lado (aria-hidden). Fundo claro: texto em --ink, botão em teal
+   escuro pra garantir contraste sobre o mint.
    ============================================================ */
-.testcta{
+.contact{
   position:relative;overflow:hidden;
   padding:clamp(5rem,9vw,7.5rem) 0;
   background:radial-gradient(120% 100% at 85% 0%, var(--mint-l) 0%, var(--cream) 55%);
 }
-.testcta__inner{
+.contact__inner{
   max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad-x);
   display:flex;align-items:center;gap:clamp(2rem,5vw,4rem);
 }
-.testcta__copy{flex:1 1 460px;min-width:0}
-.testcta__title{
+.contact__copy{flex:1 1 460px;min-width:0}
+.contact__title{
   margin-top:var(--space-16);font-weight:800;font-size:var(--fs-h2);
-  letter-spacing:-.01em;max-width:16ch;
+  letter-spacing:-.01em;max-width:18ch;
 }
-.testcta__sub{margin-top:var(--space-12);font-size:var(--fs-lead);opacity:.82;max-width:44ch}
-.testcta__form{margin-top:var(--space-24);display:flex;flex-direction:column;gap:var(--space-16);max-width:420px}
+.contact__sub{margin-top:var(--space-12);font-size:var(--fs-lead);opacity:.82;max-width:44ch}
+.contact__form{margin-top:var(--space-24);display:flex;flex-direction:column;gap:var(--space-16);max-width:420px}
 
-.testcta__glyph{flex:0 0 300px;display:flex;justify-content:center}
-.testcta__glyph-canvas{width:min(300px,60vw);aspect-ratio:1/1;display:block}
+/* Seletor de intenção: <fieldset>+<legend> reais (a11y), 3 radios
+   estilizados como chips. O <input> fica visualmente escondido
+   (mesma técnica de .visually-hidden) mas continua no fluxo de
+   tab/teclado — o "chip" reage ao estado do radio via
+   data-checked (setado em React a partir do state, não CSS
+   :has()/:checked, pra não depender de suporte de :has()). */
+.contact__intent{border:0;padding:0;margin:0}
+.contact__intent-legend{font-weight:700;font-size:.9rem;padding:0;margin-bottom:var(--space-8)}
+.contact__intent-options{display:flex;flex-wrap:wrap;gap:var(--space-8)}
+.intent-chip{
+  position:relative;display:inline-flex;align-items:center;
+  font-weight:700;font-size:.88rem;color:var(--ink);
+  background:#fff;border:1px solid var(--mint-l);border-radius:999px;
+  padding:.6em 1.1em;cursor:pointer;
+  transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);
+}
+.intent-chip[data-checked="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.intent-chip:focus-within{outline:2px solid var(--teal);outline-offset:2px}
+
+.contact__glyph{flex:0 0 300px;display:flex;justify-content:center}
+.contact__glyph-canvas{width:min(300px,60vw);aspect-ratio:1/1;display:block}
 
 @media (max-width:900px){
-  .testcta__inner{flex-direction:column;text-align:center}
-  .testcta__title,.testcta__sub{margin-inline:auto}
-  .testcta__form{margin-inline:auto;text-align:left}
-  .testcta__glyph{order:-1}
-}
-
-/* ============================================================
-   FEEDBACK — cena 7, creme (mesma família do Manifesto/Recursos).
-   Form curto e centralizado.
-   ============================================================ */
-.feedback{background:var(--cream)}
-.feedback__inner{
-  max-width:640px;margin-inline:auto;padding:clamp(4.5rem,8vw,7rem) var(--pad-x);
-  text-align:center;
-}
-.feedback__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em}
-.feedback__sub{margin-top:var(--space-12);font-size:var(--fs-lead);opacity:.82}
-.feedback__form{
-  margin-top:var(--space-24);display:flex;flex-direction:column;gap:var(--space-16);
-  text-align:left;
+  .contact__inner{flex-direction:column;text-align:center}
+  .contact__title,.contact__sub{margin-inline:auto}
+  .contact__intent-options{justify-content:center}
+  .contact__form{margin-inline:auto;text-align:left}
+  .contact__glyph{order:-1}
 }
 
 /* ============================================================

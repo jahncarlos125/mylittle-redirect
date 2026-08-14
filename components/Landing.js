@@ -12,8 +12,8 @@ const EASE = "power3.out";
 /**
  * Orquestrador de motion da landing: smooth scroll (Lenis) + timelines GSAP
  * centrais. As seções (Hero, Features, etc.) só precisam usar os atributos
- * data-animate="up"|"line", data-magnetic, data-tilt, data-pin — o mecanismo
- * aqui é genérico, não conhece o conteúdo de nenhuma seção específica.
+ * data-animate="up"|"line", data-magnetic, data-tilt — o mecanismo aqui é
+ * genérico, não conhece o conteúdo de nenhuma seção específica.
  *
  * Reduced-motion: Lenis nem chega a instalar (early return no useEffect) e o
  * useGSAP também sai cedo, deixando tudo visível via clearProps — nenhuma
@@ -231,41 +231,12 @@ export default function Landing({ children }) {
         },
       });
 
-      /* ---- Como funciona: pin curto + barra de progresso + parallax dos
-         ícones. O pin dura só 60% da altura da viewport (não o suficiente
-         pra travar o scroll) e usa scrub, então acompanha o dedo/roda em
-         vez de tocar animação por conta própria. A entrada dos .step (fade
-         + up) continua por conta do [data-animate="up"] genérico acima;
-         aqui só animamos propriedades que não conflitam com ela (a barra
-         de progresso, a cor/escala do número decorativo e o yPercent do
-         ícone), pra não competir por x/y/opacity do mesmo elemento. */
-      const pinSection = document.querySelector("[data-pin]");
-      if (pinSection) {
-        const pinRange = { trigger: pinSection, start: "top top", end: "+=60%" };
-
-        ScrollTrigger.create({ ...pinRange, pin: true, pinSpacing: true, scrub: 1 });
-
-        gsap.fromTo(
-          "[data-progress-fill]",
-          { scaleX: 0 },
-          { scaleX: 1, ease: "none", transformOrigin: "left", scrollTrigger: { ...pinRange, scrub: 1 } }
-        );
-
-        gsap.timeline({ scrollTrigger: { ...pinRange, scrub: 1 } }).to(".step__num", {
-          color: "#6fd6c0" /* --mint */,
-          scale: 1.12,
-          stagger: 0.5,
-          ease: "none",
-        });
-
-        gsap.utils.toArray("[data-pin] .step__icon").forEach((icon) => {
-          gsap.to(icon, {
-            yPercent: -10,
-            ease: "none",
-            scrollTrigger: { trigger: icon, start: "top bottom", end: "bottom top", scrub: true },
-          });
-        });
-      }
+      /* ---- Como funciona: sem pin. A seção rolava travada (pin:true) com
+         os passos deslizando lateralmente via parallax/scrub — no mobile
+         isso lia como "a página travou, só os números andam pro lado".
+         Removido: a entrada dos .step (fade + up) já é coberta pelo reveal
+         genérico [data-animate="up"] acima, então a seção rola normalmente
+         como qualquer outra. */
 
       ScrollTrigger.refresh();
     },

@@ -6,8 +6,7 @@ import Manifesto from '@/components/Manifesto'
 import HowItWorks from '@/components/HowItWorks'
 import Features from '@/components/Features'
 import Gallery from '@/components/Gallery'
-import TestCta from '@/components/TestCta'
-import FeedbackForm from '@/components/FeedbackForm'
+import ContactForm from '@/components/ContactForm'
 import Faq from '@/components/Faq'
 import Footer from '@/components/Footer'
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
@@ -29,8 +28,7 @@ export default function Home() {
           <HowItWorks />
           <Features />
           <Gallery />
-          <TestCta />
-          <FeedbackForm />
+          <ContactForm />
           <Faq />
         </main>
         <Footer />
