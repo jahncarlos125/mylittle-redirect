@@ -306,7 +306,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 
 .scene__media{
   flex:1 1 320px;display:flex;justify-content:center;
-  overflow:hidden;padding-block:var(--space-40);
+  padding-block:var(--space-40);
 }
 .scene__frame{
   width:min(280px,70vw);flex:none;border-radius:38px;padding:9px;
