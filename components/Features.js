@@ -55,7 +55,7 @@ const FEATURES = [
     ),
   },
   {
-    title: "Claro & escuro",
+    title: "Tema adaptável",
     text: "O app se adapta ao seu momento do dia — troque de tema com um toque, quando quiser.",
     pair: true,
     media: (
