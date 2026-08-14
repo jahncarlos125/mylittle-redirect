@@ -75,7 +75,7 @@ export default function Gallery() {
                     src={shot.src}
                     alt={shot.alt}
                     fill
-                    sizes="(max-width: 640px) 28vw, (max-width: 1000px) 22vw, 220px"
+                    sizes="(max-width: 767px) 64vw, (max-width: 1000px) 22vw, 220px"
                     style={{ objectFit: "cover" }}
                     loading="lazy"
                   />

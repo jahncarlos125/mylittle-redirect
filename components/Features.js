@@ -97,8 +97,10 @@ export default function Features() {
               key={f.title}
             >
               <div className="feature-card__media">{f.media}</div>
-              <h3 className="feature-card__title">{f.title}</h3>
-              <p className="feature-card__text">{f.text}</p>
+              <div className="feature-card__body">
+                <h3 className="feature-card__title">{f.title}</h3>
+                <p className="feature-card__text">{f.text}</p>
+              </div>
             </article>
           ))}
         </div>

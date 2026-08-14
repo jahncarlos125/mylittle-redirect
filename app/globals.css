@@ -60,6 +60,15 @@ img{max-width:100%;display:block}
 }
 .nav__cta:hover{background:#fff}
 
+/* Auto-hide no mobile: some ao rolar pra baixo, reaparece ao rolar pra
+   cima (classe alternada em components/Landing.js). Fica de fora do
+   desktop (≥768px) — lá a nav continua só solidificando via .nav--solid,
+   igual antes. */
+@media (max-width:767px){
+  .nav{transition:transform .3s var(--ease),background .45s var(--ease),backdrop-filter .45s var(--ease),padding .45s var(--ease),border-color .45s var(--ease)}
+  .nav--hidden{transform:translateY(-100%)}
+}
+
 /* ---------- Barra de progresso (scroll) ---------- */
 [data-progress]{
   position:fixed;top:0;left:0;height:3px;width:100%;
@@ -158,11 +167,22 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 .hero__phone img{width:100%;height:auto;display:block;border-radius:30px}
 
-@media (max-width:720px){
+@media (max-width:767px){
   .hero__inner{flex-direction:column;text-align:center}
-  .badge,.hero__cta,.hero__stats{justify-content:center}
+  .badge,.hero__cta{justify-content:center}
   .hero__title,.hero__sub{margin-left:auto;margin-right:auto}
   .hero__title{max-width:22ch}
+
+  /* 3 colunas iguais em vez de "flex-wrap" (que sobrava 1 stat sozinho
+     numa segunda linha, desalinhado) — número+label ficam centralizados e
+     simétricos em qualquer largura de mobile. */
+  .hero__stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-12);
+    justify-content:stretch;
+  }
+  .hero__stats .stat{min-width:0}
+  .hero__stats .stat b{font-size:clamp(1rem,4.4vw,1.375rem)}
+  .hero__stats .stat span{display:block;font-size:.72rem}
 }
 
 @media (prefers-reduced-motion: no-preference){
@@ -288,10 +308,32 @@ html[data-invite="1"] #invite-overlay{display:flex}
 @media (max-width:1000px){
   .features__grid{grid-template-columns:repeat(2,1fr)}
 }
-@media (max-width:520px){
-  .features__grid{grid-template-columns:1fr}
-  .feature-card__shot{width:52%}
-  .feature-card__shot--pair{width:38%}
+
+/* Mobile (≤767px): cards deixam de mostrar print de tela cheia (~1
+   viewport cada) e viram linhas compactas — miniatura pequena à esquerda
+   (recortada no topo da tela via object-fit:cover) + título/texto à
+   direita. Fica bem abaixo de 1 viewport por card. Vem depois do bloco
+   ≤1000px no arquivo, então nessa faixa (que também cai dentro de
+   ≤1000px) estas regras vencem por ordem de origem — o 2-colunas de
+   768-1000px (desktop, fora do escopo desta correção) continua intacto. */
+@media (max-width:767px){
+  .features__grid{grid-template-columns:1fr;gap:var(--space-12)}
+  .feature-card{
+    flex-direction:row;align-items:center;gap:var(--space-16);
+    padding:var(--space-12) var(--space-16);
+  }
+  .feature-card__media{
+    flex:0 0 104px;width:104px;height:104px;align-self:center;
+    align-items:stretch;justify-content:center;padding-top:0;
+  }
+  .feature-card__shot{
+    width:100%;height:100%;object-fit:cover;object-position:top;
+    border-radius:10px;box-shadow:none;
+  }
+  .feature-card__shot--pair{width:48%;height:100%}
+  .feature-card__body{flex:1 1 auto;min-width:0}
+  .feature-card__title{margin-top:0;font-size:1rem}
+  .feature-card__text{font-size:.86rem}
 }
 
 /* ============================================================
@@ -330,10 +372,39 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 .gallery__frame img{object-fit:cover}
 
-@media (max-width:640px){
-  .gallery__track{gap:var(--space-8)}
-  .gallery__col{gap:var(--space-8)}
-  .gallery__col--offset{margin-top:clamp(16px,8vw,32px)}
+/* Mobile (≤767px): carrossel horizontal com scroll-snap nativo, em vez de
+   empilhar as telas verticalmente (que duplicava, num bloco só, quase
+   todas as telas já mostradas no Hero/Recursos). O parallax vertical
+   ([data-parallax]) é desligado nessa faixa via ScrollTrigger.matchMedia
+   em components/Landing.js — não teria sentido junto com scroll-snap
+   horizontal, e sem ele as .gallery__col nunca recebem transform no
+   mobile.
+   .gallery__col vira display:contents: sem essa "caixa" própria, seus
+   filhos (.gallery__frame) participam diretamente do flex row do
+   .gallery__track, que é quem tem overflow-x:auto. Isso é o único
+   overflow-x da página — .gallery__track tem max-width:100% herdado do
+   .gallery__stage/section (nunca excede a viewport), então o scroll
+   horizontal fica contido aqui dentro e nunca vaza pro <body>. */
+@media (max-width:767px){
+  .gallery__stage{position:relative;padding-block:var(--space-16)}
+  .gallery__track{
+    display:flex;flex-wrap:nowrap;justify-content:flex-start;
+    gap:var(--space-16);max-width:100%;
+    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    padding-bottom:var(--space-8);
+  }
+  .gallery__col{display:contents}
+  .gallery__col--offset{margin-top:0}
+  .gallery__frame{
+    flex:0 0 auto;width:min(64vw,240px);height:auto;
+    scroll-snap-align:center;
+  }
+
+  /* dica sutil de "tem mais telas pra esse lado" */
+  .gallery__stage::after{
+    content:"";position:absolute;top:var(--space-16);right:0;bottom:var(--space-16);width:36px;
+    background:linear-gradient(90deg,transparent,#082722 88%);pointer-events:none;
+  }
 }
 
 /* ============================================================

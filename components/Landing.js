@@ -22,6 +22,54 @@ const EASE = "power3.out";
 export default function Landing({ children }) {
   const root = useRef(null);
 
+  /* ---- Nav auto-hide no mobile (≤767px) ----
+     Independente do Lenis/reduced-motion: roda sempre, porque aqui é
+     usabilidade (nav sticky cobrindo conteúdo), não decoração. Compara o
+     scrollY atual com o anterior num listener nativo de "scroll" — funciona
+     tanto com Lenis quanto sem, já que o Lenis (no modo padrão, sem virtual
+     scroll) move o scroll real do documento, então o evento nativo dispara
+     do mesmo jeito. Só alterna a classe .nav--hidden; o efeito visual (a
+     transform) fica 100% no CSS, dentro de @media (max-width:767px), então
+     no desktop a classe pode até ser adicionada sem nenhum efeito visível. */
+  useEffect(() => {
+    const nav = document.querySelector("[data-nav]");
+    if (!nav) return;
+
+    const mq = matchMedia("(max-width: 767px)");
+    let lastY = window.scrollY;
+
+    const show = () => nav.classList.remove("nav--hidden");
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (!mq.matches || y < 80) {
+        show();
+      } else if (y > lastY + 4) {
+        nav.classList.add("nav--hidden");
+      } else if (y < lastY - 4) {
+        show();
+      }
+      lastY = y;
+    };
+
+    // volta a aparecer se o foco entrar num link da nav (ex.: navegação por
+    // teclado escondida atrás de um scroll pra baixo)
+    nav.addEventListener("focusin", show);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const onMqChange = () => {
+      lastY = window.scrollY;
+      if (!mq.matches) show();
+    };
+    mq.addEventListener?.("change", onMqChange) ?? mq.addListener(onMqChange);
+
+    return () => {
+      nav.removeEventListener("focusin", show);
+      window.removeEventListener("scroll", onScroll);
+      mq.removeEventListener?.("change", onMqChange) ?? mq.removeListener(onMqChange);
+    };
+  }, []);
+
   /* ---- Smooth scroll (Lenis) + magnetismo + tilt ---- */
   useEffect(() => {
     if (document.documentElement.classList.contains("reduced")) return;
@@ -163,14 +211,24 @@ export default function Landing({ children }) {
          ScrollTrigger é 0, então ele nasce na posição natural (sem pulo);
          só desloca em Y — nunca X — então não cria overflow horizontal, e
          não há listener de wheel/preventDefault nem toque em overflow do
-         html/body, então o scroll da página nunca é sequestrado. */
-      gsap.utils.toArray("[data-parallax]").forEach((el) => {
-        const speed = parseFloat(el.dataset.parallaxSpeed) || 1;
-        gsap.to(el, {
-          yPercent: -9 * speed,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
-        });
+         html/body, então o scroll da página nunca é sequestrado.
+
+         Só roda em ≥768px (ScrollTrigger.matchMedia cuida de criar/reverter
+         os ScrollTriggers conforme o viewport). No mobile a galeria vira um
+         carrossel horizontal nativo (ver Gallery.js/app/globals.css) — sem
+         parallax vertical, que não faria sentido junto com scroll-snap
+         horizontal. */
+      ScrollTrigger.matchMedia({
+        "(min-width: 768px)": () => {
+          gsap.utils.toArray("[data-parallax]").forEach((el) => {
+            const speed = parseFloat(el.dataset.parallaxSpeed) || 1;
+            gsap.to(el, {
+              yPercent: -9 * speed,
+              ease: "none",
+              scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+            });
+          });
+        },
       });
 
       /* ---- Como funciona: pin curto + barra de progresso + parallax dos
