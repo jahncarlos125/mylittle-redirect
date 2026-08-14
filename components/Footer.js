@@ -12,11 +12,21 @@ export default function Footer() {
         <nav className="footer__links" aria-label="Links do rodapé">
           <a href="/politica-de-privacidade/">Política de Privacidade</a>
           <a href="/exclusao-de-conta/">Exclusão de conta</a>
-          <a href="mailto:abisaytech@gmail.com">Contato</a>
+          <a href="mailto:contato@abisay.tech">Contato</a>
         </nav>
 
         <p className="footer__copy">
           © {new Date().getFullYear()} Meu Cuidado
+        </p>
+        <p className="footer__credit">
+          Um app da{" "}
+          <a
+            href="https://abisay.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abisay.tech
+          </a>
         </p>
       </div>
     </footer>

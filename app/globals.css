@@ -300,6 +300,28 @@ html[data-invite="1"] #invite-overlay{display:flex}
   .feature-card:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(18,33,31,.12)}
 }
 
+/* Desktop (≥768px): os 4 cards precisam alinhar os títulos na mesma
+   linha horizontal. O card "Claro & escuro" tem 2 telas (par) em vez de
+   1 — como as duas telas do par compartilham a mesma proporção da tela
+   única, dar a mesma LARGURA às duas não funciona (dobraria a largura
+   necessária); em vez disso, todos os cards ganham uma altura de mídia
+   fixa e as imagens (single ou par) se ajustam a essa altura via
+   height:100%/width:auto, then ficam centralizadas. clamp() encolhe a
+   altura um pouco em telas mais estreitas (768–1000px, grid 2 colunas
+   ainda cabe folgado; pouco acima de 1000px, grid vira 4 colunas e o
+   card fica mais estreito) para o par de telas nunca estourar a largura
+   do card — a `.feature-card__media` mantém overflow:hidden como rede
+   de segurança extra contra overflow horizontal. */
+@media (min-width:768px){
+  .features__grid{align-items:stretch}
+  .feature-card{height:100%}
+  .feature-card__media{
+    height:clamp(140px,16vw,230px);align-items:center;justify-content:center;padding-top:0;
+  }
+  .feature-card__shot{width:auto;height:100%;max-width:100%}
+  .feature-card__shot--pair{width:auto;height:100%;max-width:100%}
+}
+
 @media (max-width:1000px){
   .features__grid{grid-template-columns:repeat(2,1fr)}
 }
@@ -545,3 +567,7 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .footer__links a:hover{color:#fff;text-decoration:underline}
 .footer__links a:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:2px}
 .footer__copy{opacity:.72;font-size:.85rem}
+.footer__credit{font-size:.85rem;opacity:.72}
+.footer__credit a{color:var(--mint-l2);text-decoration:underline;opacity:1}
+.footer__credit a:hover{color:#fff}
+.footer__credit a:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:2px}

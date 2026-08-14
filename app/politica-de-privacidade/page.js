@@ -22,7 +22,7 @@ export default function PoliticaDePrivacidade() {
         <h2>Responsavel e contato</h2>
         <p>
           O responsavel pelo aplicativo Meu Cuidado pode ser contatado pelo email{' '}
-          <a href="mailto:abisaytech@gmail.com">abisaytech@gmail.com</a> para duvidas
+          <a href="mailto:contato@abisay.tech">contato@abisay.tech</a> para duvidas
           sobre privacidade, dados pessoais ou solicitacoes relacionadas a esta politica.
         </p>
 

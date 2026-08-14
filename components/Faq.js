@@ -35,7 +35,7 @@ const ITEMS = [
       <>
         Use o formulário logo abaixo e escolha “Enviar um feedback”, ou
         escreva para{" "}
-        <a href="mailto:abisaytech@gmail.com">abisaytech@gmail.com</a> a
+        <a href="mailto:contato@abisay.tech">contato@abisay.tech</a> a
         qualquer momento.
       </>
     ),

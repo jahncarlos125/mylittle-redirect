@@ -34,7 +34,7 @@ export default function ExclusaoDeConta() {
         <h2>Solicitacao por contato</h2>
         <p>
           Se voce nao conseguir acessar o aplicativo, envie uma solicitacao para{' '}
-          <a href="mailto:abisaytech@gmail.com">abisaytech@gmail.com</a> usando o email
+          <a href="mailto:contato@abisay.tech">contato@abisay.tech</a> usando o email
           da conta e informe que deseja excluir sua conta e seus dados do Meu Cuidado.
           Podemos pedir informacoes adicionais para confirmar que a solicitacao foi
           feita pelo titular da conta.
