@@ -1,6 +1,7 @@
 import localFont from 'next/font/local'
 import './globals.css'
 import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
+import { Analytics } from '@vercel/analytics/next'
 
 const manrope = localFont({
   src: [
@@ -83,6 +84,7 @@ export default function RootLayout({ children }) {
         />
         <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
         {children}
+        <Analytics />
       </body>
     </html>
   )
