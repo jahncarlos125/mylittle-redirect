@@ -338,15 +338,21 @@ html[data-invite="1"] #invite-overlay{display:flex}
    a ordem volta a seguir o DOM (texto sempre antes do print) em ambos os
    tipos de cena. */
 @media (max-width:767px){
-  .scene{padding-block:clamp(2.5rem,10vw,3.5rem)}
+  .scene{padding-block:clamp(1.4rem,5vw,2.2rem)}
   .scene__inner,.scene--reverse .scene__inner{
-    flex-direction:column;text-align:center;gap:var(--space-24);
+    flex-direction:column;text-align:center;gap:var(--space-16);
   }
   .scene__desc{margin-inline:auto}
-  .scene__media{padding-block:var(--space-12)}
-  .scene__frame{width:min(220px,58vw)}
-  .scene__frame--pair{width:min(150px,40vw)}
+  .scene__media{padding-block:var(--space-8)}
+  .scene__frame{width:min(300px,78vw)}
+  .scene__frame--tablet{width:min(560px,94vw);border-radius:18px;padding:7px}
+  .scene__frame--pair{width:min(190px,47vw)}
   .scene__frame--pair + .scene__frame--pair{margin-left:calc(-1 * clamp(20px,10vw,32px))}
+  /* Menos respiro vertical no mobile (cortar o "espaço em branco"). */
+  .features__inner{padding-top:clamp(2rem,9vw,3rem)}
+  .devices__inner{padding-block:clamp(2rem,9vw,3rem)}
+  .faq__inner{padding-block:clamp(2.5rem,9vw,3.5rem)}
+  .manifesto__inner{padding-block:clamp(3rem,11vw,4.25rem)}
 }
 
 /* ============================================================
