@@ -5,7 +5,7 @@ import Hero from '@/components/Hero'
 import Manifesto from '@/components/Manifesto'
 import HowItWorks from '@/components/HowItWorks'
 import Features from '@/components/Features'
-import ContactForm from '@/components/ContactForm'
+import Devices from '@/components/Devices'
 import Faq from '@/components/Faq'
 import Footer from '@/components/Footer'
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
@@ -26,7 +26,7 @@ export default function Home() {
           <Manifesto />
           <HowItWorks />
           <Features />
-          <ContactForm />
+          <Devices />
           <Faq />
         </main>
         <Footer />

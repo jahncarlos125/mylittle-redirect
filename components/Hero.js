@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ParticleField from "./ParticleField";
+import { PLAY_URL } from "@/lib/site";
 
 /**
  * Cena 1: hero teal. Único <h1> da página. O motion de entrada (fade+up,
@@ -18,7 +19,7 @@ export default function Hero() {
         <div className="hero__left">
           <span className="badge" data-animate="up">
             <span className="badge__dot" aria-hidden="true" />
-            Em teste fechado · Android
+            Já disponível · Android
           </span>
 
           <h1 className="hero__title" data-animate="line">
@@ -37,8 +38,14 @@ export default function Hero() {
           </p>
 
           <div className="hero__cta" data-animate="up">
-            <a className="btn btn--primary" href="#testar" data-magnetic>
-              Quero testar →
+            <a
+              className="btn btn--primary"
+              href={PLAY_URL}
+              target="_blank"
+              rel="noopener"
+              data-magnetic
+            >
+              Baixar na Google Play →
             </a>
             <a className="btn btn--ghost" href="#como-funciona">
               Como funciona
@@ -67,7 +74,7 @@ export default function Hero() {
               src="/screenshots/hoje-light.webp"
               alt="Tela “Hoje” do app Meu Cuidado, com a lista de lembretes de remédios do dia"
               width={272}
-              height={605}
+              height={583}
               priority
             />
           </div>

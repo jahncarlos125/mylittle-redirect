@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PLAY_URL } from "@/lib/site";
 
 /**
  * Cena 9 (teal, mesma família do Hero/Como funciona): footer rico
@@ -18,7 +19,7 @@ const APP_LINKS = [
   { href: "#recursos", label: "Recursos" },
   { href: "#como-funciona", label: "Como funciona" },
   { href: "#faq", label: "Perguntas frequentes" },
-  { href: "#testar", label: "Quero testar" },
+  { href: PLAY_URL, label: "Baixar na Play" },
 ];
 
 const INSTITUTIONAL_LINKS = [
@@ -45,8 +46,13 @@ export default function Footer() {
             <p className="footer__tagline">
               Lembretes de remédios para você e quem você ama.
             </p>
-            <a href="#testar" className="footer__cta">
-              Participar do teste
+            <a
+              href={PLAY_URL}
+              target="_blank"
+              rel="noopener"
+              className="footer__cta"
+            >
+              Baixar na Play
             </a>
           </div>
 

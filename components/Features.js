@@ -30,10 +30,10 @@ const SCENES = [
     media: (
       <div className="scene__frame">
         <Image
-          src="/screenshots/hoje-light.webp"
-          alt="Tela “Hoje” do app Meu Cuidado, com a lista de lembretes de remédios do dia"
+          src="/screenshots/hoje-dark.webp"
+          alt="Tela “Hoje” do app Meu Cuidado no tema escuro, com a lista de lembretes de remédios do dia"
           width={320}
-          height={712}
+          height={686}
           loading="lazy"
         />
       </div>
@@ -42,14 +42,14 @@ const SCENES = [
   {
     id: "familia",
     title: "Cuide da família",
-    text: "Acompanhe os remédios de pais, filhos ou de quem você cuida — tudo no mesmo lugar.",
+    text: "Acompanhe os remédios de pais, filhos ou de quem você cuida — tudo no mesmo lugar. No tablet, a lista e os detalhes ficam lado a lado.",
     media: (
-      <div className="scene__frame">
+      <div className="scene__frame scene__frame--tablet">
         <Image
-          src="/screenshots/pessoas-light.webp"
-          alt="Tela “Pessoas” do app Meu Cuidado, com a lista de familiares acompanhados"
-          width={320}
-          height={712}
+          src="/screenshots/tablet-dependente-light.webp"
+          alt="App Meu Cuidado no tablet: lista de dependentes à esquerda e os remédios da pessoa selecionada à direita"
+          width={1100}
+          height={674}
           loading="lazy"
         />
       </div>
@@ -65,52 +65,36 @@ const SCENES = [
           src="/screenshots/remedios-light.webp"
           alt="Tela “Remédios” do app Meu Cuidado, com a lista completa de medicamentos cadastrados"
           width={320}
-          height={712}
+          height={686}
           loading="lazy"
         />
       </div>
     ),
   },
   {
-    id: "tema",
-    title: "Tema adaptável",
-    text: "O app se adapta ao seu momento do dia — troque de tema com um toque, quando quiser.",
+    id: "scan",
+    title: "Cadastre pelo rótulo ou código de barras",
+    text: "Aponte a câmera para a caixa do remédio: o app lê o rótulo ou o código de barras e já preenche o nome e a dose pra você.",
     media: (
       <div className="scene__pair">
         <div className="scene__frame scene__frame--pair">
           <Image
-            src="/screenshots/hoje-light.webp"
-            alt="Tela “Hoje” do app Meu Cuidado no tema claro"
+            src="/screenshots/scan-light.webp"
+            alt="Tela de escanear medicamento do app Meu Cuidado, com a câmera apontada para o rótulo de um remédio"
             width={210}
-            height={467}
+            height={450}
             loading="lazy"
           />
         </div>
-        <div className="scene__frame scene__frame--pair scene__frame--dark">
+        <div className="scene__frame scene__frame--pair">
           <Image
-            src="/screenshots/hoje-dark.webp"
-            alt="Tela “Hoje” do app Meu Cuidado no tema escuro"
+            src="/screenshots/scan-form-light.webp"
+            alt="Formulário de novo remédio do app Meu Cuidado preenchido automaticamente após escanear o rótulo"
             width={210}
-            height={467}
+            height={450}
             loading="lazy"
           />
         </div>
-      </div>
-    ),
-  },
-  {
-    id: "cadastro",
-    title: "Cadastro em segundos",
-    text: "Adicionar um remédio novo é rápido: nome, dose e horário — e pronto, já está na tela do dia.",
-    media: (
-      <div className="scene__frame">
-        <Image
-          src="/screenshots/editar-light.webp"
-          alt="Tela de edição de remédio do app Meu Cuidado, com nome, dose e horário"
-          width={320}
-          height={712}
-          loading="lazy"
-        />
       </div>
     ),
   },
