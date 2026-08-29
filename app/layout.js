@@ -70,7 +70,14 @@ export default function RootLayout({ children }) {
             navegacao (location.href) para o DOMContentLoaded: chamar location.href durante o parse
             do documento aborta o parse e o overlay/fallback/landing nunca entram no DOM (bug da v1). */}
         <script dangerouslySetInnerHTML={{ __html:
-          `(function(){var t=new URLSearchParams(location.search).get('token');if(!t||!t.trim())return;`+
+          // Aceita o token em DOIS formatos, para o upgrade de custom scheme -> App Link:
+          //   legado (querystring):  /?token=<token>
+          //   novo (path/App Link):  /invite/<token>   (o Android verifica o dominio e
+          //     abre o app direto quando instalado; quando nao, cai aqui como fallback web)
+          // O deep link continua sendo mylittle://invite/<token> (contrato com o app).
+          `(function(){var q=new URLSearchParams(location.search).get('token');`+
+          `var m=location.pathname.match(/\\/invite\\/([^\\/?#]+)/);var t=q||(m&&m[1]);`+
+          `if(!t||!t.trim())return;t=decodeURIComponent(t);`+
           `document.documentElement.dataset.invite='1';var deep='mylittle://invite/'+t;`+
           `function go(){location.href=deep;setTimeout(function(){var a=document.getElementById('invite-fallback');`+
           `if(a){a.href=deep;a.parentElement.style.display='block';}},2500);}`+

@@ -83,7 +83,9 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .invite-overlay__text{font-size:var(--fs-lead);color:var(--ink);max-width:36ch}
 .invite-fallback{margin-top:var(--space-8)}
 .invite-fallback__hint{color:var(--ink);opacity:.72;margin-bottom:var(--space-12)}
-.invite-fallback__link{display:inline-block;background:var(--teal);color:#fff;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:700}
+.invite-fallback__link{display:block;width:fit-content;margin-inline:auto;background:var(--teal);color:#fff;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:700}
+.invite-fallback__link + .invite-fallback__link{margin-top:var(--space-12)}
+.invite-fallback__link--ghost{background:transparent;color:var(--teal);border:1.5px solid var(--mint-l)}
 .invite-fallback__link:hover{background:var(--deep)}
 @keyframes invite-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .legal-page{min-height:100dvh;padding:var(--space-40) var(--pad-x)}
@@ -325,6 +327,11 @@ html[data-invite="1"] #invite-overlay{display:flex}
 }
 .scene__frame--dark{background:linear-gradient(160deg,#1a3833,#0c2f2a)}
 
+/* Cena com print de TABLET (paisagem): moldura mais larga e cantos
+   menores, mantendo o mesmo bisel teal das demais. */
+.scene__frame--tablet{width:min(560px,84vw);border-radius:22px;padding:8px}
+.scene__frame--tablet img{border-radius:15px}
+
 /* Mobile (≤767px): empilha em 1 coluna — texto em cima, print embaixo,
    centralizado. flex-direction:column aqui (em .scene__inner E
    .scene--reverse .scene__inner) sobrepõe o row-reverse do desktop, então
@@ -340,6 +347,40 @@ html[data-invite="1"] #invite-overlay{display:flex}
   .scene__frame{width:min(220px,58vw)}
   .scene__frame--pair{width:min(150px,40vw)}
   .scene__frame--pair + .scene__frame--pair{margin-left:calc(-1 * clamp(20px,10vw,32px))}
+}
+
+/* ============================================================
+   DISPOSITIVOS — o app no celular E no tablet na mesma cena: um
+   tablet em paisagem com um celular à frente (combo). Reforça
+   "mesmo app, qualquer tela" sem uma seção exclusiva de tablet.
+   Molduras combinam com os frames de celular (.scene__frame):
+   mesmo bisel teal + sombra. O tablet usa data-tilt (filho
+   .device) — leve 3D no hover (ver Landing.js).
+   ============================================================ */
+.devices{background:var(--cream);color:var(--ink)}
+.devices__inner{max-width:var(--maxw);margin-inline:auto;padding:clamp(3.5rem,8vw,6.5rem) var(--pad-x)}
+.devices__head{max-width:52ch;margin-inline:auto;text-align:center}
+.devices__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em;color:var(--deep)}
+.devices__desc{margin-top:var(--space-16);font-size:var(--fs-lead);line-height:1.6;opacity:.78}
+.combo{position:relative;width:min(880px,100%);margin:clamp(2.5rem,6vw,4.5rem) auto 0}
+.combo__tablet{
+  width:100%;border-radius:26px;padding:10px;
+  background:linear-gradient(160deg,#0c2f2a,#08221e);
+  box-shadow:0 34px 80px rgba(18,33,31,.24),0 0 0 1px rgba(255,255,255,.06);
+}
+.combo__tablet .device{display:block;width:100%}
+.combo__tablet img{display:block;width:100%;height:auto;border-radius:18px}
+/* Celular à frente, no canto inferior-esquerdo, levemente girado. */
+.combo__phone{
+  position:absolute;left:1%;bottom:-7%;width:20%;z-index:2;
+  border-radius:26px;padding:6px;transform:rotate(-5deg);
+  background:linear-gradient(160deg,#0c2f2a,#08221e);
+  box-shadow:0 26px 50px rgba(18,33,31,.34),0 0 0 1px rgba(255,255,255,.06);
+}
+.combo__phone img{display:block;width:100%;height:auto;border-radius:20px}
+@media (max-width:767px){
+  .combo__phone{width:27%;left:-1%;bottom:-8%;border-radius:20px}
+  .combo__phone img{border-radius:15px}
 }
 
 /* ============================================================

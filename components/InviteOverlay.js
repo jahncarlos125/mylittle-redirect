@@ -7,14 +7,28 @@
 // display:none e o script inline troca pra display:block apos 2500ms sem
 // resposta do app (ver app/layout.js). Sem aria-live, leitor de tela nunca
 // percebe que o fallback apareceu (Task 10 - auditoria a11y).
+import { PLAY_URL } from '@/lib/site'
+
 export default function InviteOverlay() {
   return (
     <div id="invite-overlay" className="invite-overlay">
       <div className="invite-spinner" aria-hidden="true" />
       <p className="invite-overlay__text">Abrindo o convite no aplicativo Meu Cuidado…</p>
       <div className="invite-fallback" role="status" aria-live="polite" style={{ display: 'none' }}>
-        <p className="invite-fallback__hint">Se o aplicativo não abrir automaticamente, toque no botão abaixo:</p>
-        <a id="invite-fallback" className="invite-fallback__link" href="#">Abrir no aplicativo</a>
+        <p className="invite-fallback__hint">
+          Se o aplicativo não abrir, instale o Meu Cuidado e toque no convite de novo:
+        </p>
+        <a
+          className="invite-fallback__link"
+          href={PLAY_URL}
+          target="_blank"
+          rel="noopener"
+        >
+          Baixar na Google Play
+        </a>
+        <a id="invite-fallback" className="invite-fallback__link invite-fallback__link--ghost" href="#">
+          Já tenho o app — abrir
+        </a>
       </div>
     </div>
   )

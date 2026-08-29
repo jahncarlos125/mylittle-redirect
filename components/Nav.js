@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PLAY_URL } from "@/lib/site";
 
 /**
  * Header fixo. Fica translúcido no topo e solidifica (.nav--solid, via
@@ -14,8 +15,14 @@ export default function Nav() {
         </a>
 
         <nav className="nav__links" aria-label="Navegação principal">
-          <a href="#testar" className="nav__cta" data-magnetic>
-            Participar do teste
+          <a
+            href={PLAY_URL}
+            target="_blank"
+            rel="noopener"
+            className="nav__cta"
+            data-magnetic
+          >
+            Baixar na Play
           </a>
         </nav>
       </div>

@@ -1,15 +1,25 @@
 "use client";
 
 import { useId, useState } from "react";
+import { PLAY_URL } from "@/lib/site";
 
 const ITEMS = [
   {
-    q: "Como funciona o teste fechado?",
-    a: "Você deixa nome e e-mail no formulário “Quero testar” desta página. Assim que abrirmos uma vaga, enviamos por e-mail o link para instalar o app e começar a usar.",
+    q: "Como instalo o Meu Cuidado?",
+    a: (
+      <>
+        É só baixar grátis na{" "}
+        <a href={PLAY_URL} target="_blank" rel="noopener">
+          Google Play
+        </a>{" "}
+        e criar sua conta em segundos — nome, dose e horário do primeiro
+        remédio e pronto.
+      </>
+    ),
   },
   {
     q: "O Meu Cuidado funciona no Android e no iOS?",
-    a: "Hoje o teste fechado é só para Android. Uma versão para iOS ainda não tem data definida.",
+    a: "Por enquanto o Meu Cuidado está disponível só para Android, na Google Play. Uma versão para iOS ainda não tem data definida.",
   },
   {
     q: "Meus dados e os dos meus dependentes estão seguros?",
@@ -23,20 +33,19 @@ const ITEMS = [
   },
   {
     q: "O app é gratuito?",
-    a: "Sim. O Meu Cuidado é gratuito durante o teste fechado, sem custos escondidos.",
+    a: "Sim. O Meu Cuidado é gratuito, sem custos escondidos.",
   },
   {
-    q: "Como eu recebo o link do teste?",
-    a: "Depois de se inscrever no formulário “Quero testar”, enviamos o link de instalação para o e-mail cadastrado assim que sua vaga for liberada.",
+    q: "Posso cuidar de mais de uma pessoa?",
+    a: "Pode. Você adiciona quantos dependentes quiser — pais, filhos, avós — e ainda pode convidar outros cuidadores para acompanhar os remédios junto com você.",
   },
   {
     q: "Como eu dou feedback sobre o app?",
     a: (
       <>
-        Use o formulário logo abaixo e escolha “Enviar um feedback”, ou
-        escreva para{" "}
+        Escreva para{" "}
         <a href="mailto:contato@abisay.tech">contato@abisay.tech</a> a
-        qualquer momento.
+        qualquer momento — a gente lê todas as mensagens.
       </>
     ),
   },

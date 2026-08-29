@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.my.little",
+      "sha256_cert_fingerprints": [
+        "46:37:EB:C5:EA:9A:00:93:FD:D1:84:6B:D7:B0:4E:6C:A7:F0:96:23:18:AF:4F:6D:18:C4:F2:41:6B:71:CB:24"
+      ]
+    }
+  }
+]
