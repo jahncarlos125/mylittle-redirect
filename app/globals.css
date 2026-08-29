@@ -161,13 +161,11 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .hero__stats .stat b{display:block;font-weight:800;font-size:1.375rem}
 .hero__stats .stat span{font-weight:500;font-size:.78rem;color:var(--mint-l2)}
 
-.hero__phone{
-  width:290px;max-width:100%;border-radius:38px;padding:9px;
-  background:linear-gradient(160deg,#0c2f2a,#08221e);
-  box-shadow:0 40px 90px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06);
-  transform:rotate(3deg);
-}
-.hero__phone img{width:100%;height:auto;display:block;border-radius:30px}
+/* O device é UMA imagem só (bezel + tela embutidos, cantos transparentes).
+   Sem moldura CSS: só posiciona e aplica a sombra que segue o formato. */
+.hero__phone{width:290px;max-width:100%;transform:rotate(3deg)}
+.hero__phone img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 34px 60px rgba(0,0,0,.42))}
 
 @media (max-width:767px){
   .hero__inner{flex-direction:column;text-align:center}
@@ -310,12 +308,11 @@ html[data-invite="1"] #invite-overlay{display:flex}
   flex:1 1 320px;display:flex;justify-content:center;
   padding-block:var(--space-40);
 }
-.scene__frame{
-  width:min(280px,70vw);flex:none;border-radius:38px;padding:9px;
-  background:linear-gradient(160deg,#0c2f2a,#08221e);
-  box-shadow:0 30px 70px rgba(18,33,31,.22),0 0 0 1px rgba(255,255,255,.06);
-}
-.scene__frame img{width:100%;height:auto;border-radius:30px;display:block}
+/* O print JÁ é o device completo (bezel embutido na imagem). O .scene__frame
+   só define a largura; a sombra segue o formato via drop-shadow. */
+.scene__frame{width:min(280px,70vw);flex:none}
+.scene__frame img{width:100%;height:auto;display:block;
+  filter:drop-shadow(0 22px 44px rgba(18,33,31,.24))}
 
 /* Cena "Tema adaptável": par de telas (claro + escuro) levemente
    sobrepostas em vez de uma imagem só — é o próprio contraste entre as
@@ -325,12 +322,8 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .scene__frame--pair + .scene__frame--pair{
   margin-left:calc(-1 * clamp(28px,6vw,48px));margin-top:var(--space-24);
 }
-.scene__frame--dark{background:linear-gradient(160deg,#1a3833,#0c2f2a)}
-
-/* Cena com print de TABLET (paisagem): moldura mais larga e cantos
-   menores, mantendo o mesmo bisel teal das demais. */
-.scene__frame--tablet{width:min(560px,84vw);border-radius:22px;padding:8px}
-.scene__frame--tablet img{border-radius:15px}
+/* Cena com print de TABLET (paisagem): só mais larga. */
+.scene__frame--tablet{width:min(560px,84vw)}
 
 /* Mobile (≤767px): empilha em 1 coluna — texto em cima, print embaixo,
    centralizado. flex-direction:column aqui (em .scene__inner E
@@ -369,24 +362,15 @@ html[data-invite="1"] #invite-overlay{display:flex}
 .devices__title{font-weight:800;font-size:var(--fs-h2);letter-spacing:-.01em;color:var(--deep)}
 .devices__desc{margin-top:var(--space-16);font-size:var(--fs-lead);line-height:1.6;opacity:.78}
 .combo{position:relative;width:min(880px,100%);margin:clamp(2.5rem,6vw,4.5rem) auto 0}
-.combo__tablet{
-  width:100%;border-radius:26px;padding:10px;
-  background:linear-gradient(160deg,#0c2f2a,#08221e);
-  box-shadow:0 34px 80px rgba(18,33,31,.24),0 0 0 1px rgba(255,255,255,.06);
-}
-.combo__tablet .device{display:block;width:100%}
-.combo__tablet img{display:block;width:100%;height:auto;border-radius:18px}
+.combo__tablet{width:100%}
+.combo__tablet img{display:block;width:100%;height:auto;
+  filter:drop-shadow(0 30px 60px rgba(18,33,31,.28))}
 /* Celular à frente, no canto inferior-esquerdo, levemente girado. */
-.combo__phone{
-  position:absolute;left:1%;bottom:-7%;width:20%;z-index:2;
-  border-radius:26px;padding:6px;transform:rotate(-5deg);
-  background:linear-gradient(160deg,#0c2f2a,#08221e);
-  box-shadow:0 26px 50px rgba(18,33,31,.34),0 0 0 1px rgba(255,255,255,.06);
-}
-.combo__phone img{display:block;width:100%;height:auto;border-radius:20px}
+.combo__phone{position:absolute;left:1%;bottom:-6%;width:21%;z-index:2;transform:rotate(-5deg)}
+.combo__phone img{display:block;width:100%;height:auto;
+  filter:drop-shadow(0 20px 40px rgba(18,33,31,.36))}
 @media (max-width:767px){
-  .combo__phone{width:27%;left:-1%;bottom:-8%;border-radius:20px}
-  .combo__phone img{border-radius:15px}
+  .combo__phone{width:28%;left:-1%;bottom:-7%}
 }
 
 /* ============================================================

@@ -21,23 +21,21 @@ export default function Devices() {
         </div>
 
         <div className="combo" data-animate="up">
-          <div className="combo__tablet" data-tilt>
-            <div className="device">
-              <Image
-                src="/screenshots/tablet-remedio-dark.webp"
-                alt="App Meu Cuidado no tablet, no tema escuro e em paisagem: lista de remédios à esquerda e o formulário de edição à direita"
-                width={1100}
-                height={674}
-                loading="lazy"
-              />
-            </div>
+          <div className="combo__tablet">
+            <Image
+              src="/screenshots/tablet-remedio-dark.webp"
+              alt="App Meu Cuidado no tablet, no tema escuro e em paisagem: lista de remédios à esquerda e o formulário de edição à direita"
+              width={1100}
+              height={690}
+              loading="lazy"
+            />
           </div>
           <div className="combo__phone">
             <Image
               src="/screenshots/hoje-light.webp"
               alt="App Meu Cuidado no celular, na tela “Hoje” com a próxima dose e a agenda do dia"
               width={272}
-              height={583}
+              height={565}
               loading="lazy"
             />
           </div>

@@ -74,7 +74,7 @@ export default function Hero() {
               src="/screenshots/hoje-light.webp"
               alt="Tela “Hoje” do app Meu Cuidado, com a lista de lembretes de remédios do dia"
               width={272}
-              height={583}
+              height={565}
               priority
             />
           </div>

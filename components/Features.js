@@ -33,7 +33,7 @@ const SCENES = [
           src="/screenshots/hoje-dark.webp"
           alt="Tela “Hoje” do app Meu Cuidado no tema escuro, com a lista de lembretes de remédios do dia"
           width={320}
-          height={686}
+          height={665}
           loading="lazy"
         />
       </div>
@@ -49,7 +49,7 @@ const SCENES = [
           src="/screenshots/tablet-dependente-light.webp"
           alt="App Meu Cuidado no tablet: lista de dependentes à esquerda e os remédios da pessoa selecionada à direita"
           width={1100}
-          height={674}
+          height={690}
           loading="lazy"
         />
       </div>
@@ -65,7 +65,7 @@ const SCENES = [
           src="/screenshots/remedios-light.webp"
           alt="Tela “Remédios” do app Meu Cuidado, com a lista completa de medicamentos cadastrados"
           width={320}
-          height={686}
+          height={665}
           loading="lazy"
         />
       </div>
@@ -82,7 +82,7 @@ const SCENES = [
             src="/screenshots/scan-light.webp"
             alt="Tela de escanear medicamento do app Meu Cuidado, com a câmera apontada para o rótulo de um remédio"
             width={210}
-            height={450}
+            height={437}
             loading="lazy"
           />
         </div>
@@ -91,7 +91,7 @@ const SCENES = [
             src="/screenshots/scan-form-light.webp"
             alt="Formulário de novo remédio do app Meu Cuidado preenchido automaticamente após escanear o rótulo"
             width={210}
-            height={450}
+            height={437}
             loading="lazy"
           />
         </div>
